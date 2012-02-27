@@ -1,0 +1,25 @@
+{extends file='layout/main.html'}
+{block name="body"}
+<div class="login_header"> 
+	<span class="fr ico_home"><a href="?url=index">返回首页</a></span>
+	<a href="#"><img src="{gen_theme_url('images/logo.png')}" class="fl"></a>
+</div>
+<!--header end-->
+<div class="login_content clearfix">
+	<form action="?url=user/login" method="post" id="login">
+		<dl class="login_form clearfix">
+			<dt class="fl">用户名:</dt><dd class="fl"><input type="text" name="user_info[name]" /></dd>
+			<dt class="fl">密码:</dt><dd class="fl"><input type="password" name="user_info[password]" /></dd>
+			<dt class="fl">&nbsp;</dt><dd class="fl btn"><a href="" class="btn1 fr submit">现在登陆</a></dd>
+		</dl>
+		
+	</form>	
+</div>
+<script type="text/javascript" charset="utf-8">
+	$('.submit').click(function(){
+		  $("#login").submit();
+		return false;
+	});
+</script>
+{include file="lib/footer.html"}
+{/block}

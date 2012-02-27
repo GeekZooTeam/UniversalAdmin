@@ -1,0 +1,72 @@
+{include file="lib/header.html"}
+
+<!--main-->
+<div id="main">
+  {include file="lib/history.html"}
+
+	<div class="breadcrumb"><a href="?url=index">首页</a> <img src="{gen_theme_url('images/i.png')}" class="ico"> <a href="?url=resource&mid={$mid}">内容列表</a> <img src="{gen_theme_url('images/i.png')}" class="ico"> <a href="javascript://">修改内容</a> </div>
+	
+	<div class="clearfix m10">
+ <form action="?url=resource/update" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+		<input type="hidden" name="mid" value="{$mid}">
+		<input type="hidden" name="rid" value="{$res_info.id}">
+		<div class="sidebar">
+			{foreach $attribute as $val}
+				{if $val.type==select}
+				<div class="m10">
+					{$val.name}:
+					<select name="attribute[{$val.id}]">
+					  {foreach $val.value as $v}
+					    <option value="{$v}" {if get_attribute_value($res_info.id, $val.name)==$v}selected{/if}>{$v}</option>
+					  {/foreach}
+					</select>
+				</div>
+				{/if}
+			{/foreach}
+			<div class="clearfix m10"><input name="" type="button" class="fr btn_fb" onclick="submit()"></div>
+		</div>
+		<div class="center">
+			{foreach $attribute as $val}
+				{if $val.type==input}
+						<div class="input_title mt10">
+						{$val.name}:
+					  	<input type="input" name="attribute[{$val.id}]" value="{get_attribute_value($res_info.id, $val.name)}" />
+						</div>
+				{elseif $val.type==text}
+					<div class="input_con mt10">
+						<div><textarea name="attribute[{$val.id}]">{get_attribute_value($res_info.id, $val.name)}</textarea></div>
+					</div>
+				{elseif $val.type==file}
+					<div class="input_title mt10">
+					{$val.name}:
+				  	<input type="file" name="attribute_{$val.id}"/>{if $file = Storage::get(get_attribute_value($res_info.id, $val.name))}<a href="?url=pic/{$res_info.id}">{$file.file_name}</a>&nbsp;&nbsp;<a href="?url=resource/del_att_value&attribute_id={$val.id}&res_id={$res_info.id}" class="del_att_value">删除</a>{/if}
+					</div>
+				{elseif $val.type==checkbox}
+				<div class="input_title mt10">
+				{$val.name}:
+				  {foreach $val.value as $v}
+				    <input type="checkbox" name="attribute[{$val.id}][]" value="{$v}" {if in_array($v, explode(',', get_attribute_value($res_info.id, $val.name)))} checked {/if}>{$v}</option>
+				  {/foreach}
+				</div>
+				{/if}
+			{/foreach}
+			<script type="text/javascript" charset="utf-8">
+				$(".del_att_value").click(function(){
+					 var url=$(this).attr("href");
+					 $.get(url, function(data){
+					  alert(data);
+					});
+					var p = $(this).parent();
+					$('a', p).remove();
+					return false;
+				});
+			</script>
+		</div>
+	</div>
+	</form>
+</div>
+<!--/main-->
+<script type="text/javascript" src="../Library/3rd/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript" src="js/tinyMCE.config.js"></script>
+
+{include file="lib/footer.html"}

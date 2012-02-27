@@ -1,0 +1,211 @@
+{extends file='layout/base.html'}
+{block name="container"}
+	<h1 class="tac">{$model_info.alias_name}</h1>
+	<form action="{$action}" method="post" id="submit_ass">
+		<input type="hidden" name="mid" value="{$mid}">
+		<input type="hidden" name="step_res_id" value="{$step_res_id}">
+		<input type="hidden" name="status" value="0">
+		{foreach $attribute as $val}
+		<div{if !($val@iteration % 3)} class="break_bar" {/if}>
+			{if $val.type=='input'}
+						<label for="{$val.name}">{$val.name}</label>
+						<input type="text" name="attribute[{$val.id}]" placeholder="{$val.value}" />
+			{elseif $val.type=='text'}
+						<label for="{$val.name}">{$val.name}</label>
+						<textarea name="attribute[{$val.id}]" cols="50" rows="6"></textarea>
+			{elseif $val.type=='checkbox'}
+						<label>{$val.name}</label>
+						{foreach $val.value as $v}
+					    <input type="checkbox" name="attribute[{$val.id}][]" value="{$v}" /> {$v}
+					  {/foreach}
+			{elseif $val.type=='select'}
+						<label>{$val.name}</label>
+			      <select name="attribute[{$val.id}]" />
+						  {foreach $val.value as $v}
+						    <option value="{$v}">{$v}</option>
+						  {/foreach}
+						</select>
+			{elseif $val.type=='date'}
+					<label>{$val.name}</label>
+					<select name="attribute[{$val.id}][y]">
+						<option>年</option>
+						{for $i=date('Y')+1;$i>1930;$i--}
+						<option value="{$i}">{$i}</option>
+						{/for}
+
+					</select>
+					<select name="attribute[{$val.id}][m]">
+						<option>月</option>
+						{for $i=1; $i <= 12; $i++}
+							<option value="{$i}">{$i}</option>
+						{/for}
+					</select>
+					<select name="attribute[{$val.id}][d]">
+						<option>日</option>
+						{for $i=1; $i <= 31; $i++}
+							<option value="{$i}">{$i}</option>
+						{/for}
+					</select>
+			{elseif $val.type=='model'}
+						<label>{$val.name}</label>
+			      <select name="attribute[{$val.id}]">
+						  {foreach $val.value as $v}
+						    <option value="{$v@key}">{$v}</option>
+						  {/foreach}
+						</select>
+			{/if}
+			{if $val.is_unique}
+				（*唯一）
+			{/if}
+			</div>
+		{/foreach}
+
+
+
+		<a href="javascript://" class="btn_order fr next_step">下一步</a>
+		<a href="javascript://" class="btn_order fr diaocha mr30">填写调查表</a>
+		<!-- <span class="lh44"><input type="checkbox" /> 我同意《婚纱摄影预定单顾客协议》</span> -->
+	</form>
+	<script type="text/javascript" charset="utf-8">
+		$('.next_step').click(function(){
+			$("input[name='status']").val(1);
+			if (!check()) {
+				return '';
+			};
+			$('#submit_ass').submit()
+		});
+		
+		$('.diaocha').click(function(){
+			$("input[name='status']").val(0);
+			// if (!check()) {
+			// 	return '';
+			// };
+			$('#submit_ass').submit()
+		});
+		
+		function check () {
+			
+			if ($("select[name='attribute[21][y]']").val()=='年') {
+				alert('请选择预定日期');
+				$("select[name='attribute[21][y]']").focus();
+				return false;
+			};
+			if ($("select[name='attribute[21][m]']").val()=='月') {
+				alert('请选择预定日期');
+				$("select[name='attribute[21][m]']").focus();
+				return false;
+			};
+			if ($("select[name='attribute[21][d]']").val()=='日') {
+				alert('请选择预定日期');
+				$("select[name='attribute[21][d]']").focus();
+				return false;
+			};
+			
+			
+			
+			if ($("select[name='attribute[22][y]']").val()=='年') {
+				alert('请选择预选日期');
+				$("select[name='attribute[22][y]']").focus();
+				return false;
+			};
+			if ($("select[name='attribute[22][m]']").val()=='月') {
+				alert('请选择预选日期');
+				$("select[name='attribute[22][m]']").focus();
+				return false;
+			};
+			if ($("select[name='attribute[22][d]']").val()=='日') {
+				alert('请选择预选日期');
+				$("select[name='attribute[22][d]']").focus();
+				return false;
+			};
+			
+			
+			if ($("select[name='attribute[23][y]']").val()=='年') {
+				alert('请选择拍照日期');
+				$("select[name='attribute[23][y]']").focus();
+				return false;
+			};
+			if ($("select[name='attribute[23][m]']").val()=='月') {
+				alert('请选择拍照日期');
+				$("select[name='attribute[23][m]']").focus();
+				return false;
+			};
+			if ($("select[name='attribute[23][d]']").val()=='日') {
+				alert('请选择拍照日期');
+				$("select[name='attribute[23][d]']").focus();
+				return false;
+			};
+			
+			
+			if ($("select[name='attribute[24][y]']").val()=='年') {
+				alert('请选择选样日期');
+				$("select[name='attribute[24][y]']").focus();
+				return false;
+			};
+			if ($("select[name='attribute[24][m]']").val()=='月') {
+				alert('请选择选样日期');
+				$("select[name='attribute[24][m]']").focus();
+				return false;
+			};
+			if ($("select[name='attribute[24][d]']").val()=='日') {
+				alert('请选择选样日期');
+				$("select[name='attribute[24][d]']").focus();
+				return false;
+			};
+			
+			
+			if ($("select[name='attribute[25][y]']").val()=='年') {
+				alert('请选择取件日期');
+				$("select[name='attribute[25][y]']").focus();
+				return false;
+			};
+			if ($("select[name='attribute[25][m]']").val()=='月') {
+				alert('请选择取件日期');
+				$("select[name='attribute[25][m]']").focus();
+				return false;
+			};
+			if ($("select[name='attribute[25][d]']").val()=='日') {
+				alert('请选择取件日期');
+				$("select[name='attribute[25][d]']").focus();
+				return false;
+			};
+			
+			
+			if ($("select[name='attribute[26][y]']").val()=='年') {
+				alert('请选择结婚日期');
+				$("select[name='attribute[26][y]']").focus();
+				return false;
+			};
+			if ($("select[name='attribute[26][m]']").val()=='月') {
+				alert('请选择结婚日期');
+				$("select[name='attribute[26][m]']").focus();
+				return false;
+			};
+			if ($("select[name='attribute[26][d]']").val()=='日') {
+				alert('请选择结婚日期');
+				$("select[name='attribute[26][d]']").focus();
+				return false;
+			};
+			
+			
+			
+			
+			if ($("input[name='attribute[27]']").val()=='') {
+				alert('套餐名称不能为空');
+				$("input[name='attribute[27]']").focus();
+				return false;
+			};
+			if ($("input[name='attribute[28]']").val()=='' || isNaN(parseInt($("input[name='attribute[28]']").val()))) {
+				alert('套餐价格不能为空并且只能填写数字');
+				$("input[name='attribute[28]']").focus();
+				return false;
+			};
+			if ($("input[name='attribute[29]']").val()=='' || isNaN(parseInt($("input[name='attribute[29]']").val()))) {
+				alert('订金金额不能为空并且只能填写数字');
+				$("input[name='attribute[29]']").focus();
+				return false;
+			};
+			return 1;
+		}
+	</script>
+{/block}

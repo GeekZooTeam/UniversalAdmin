@@ -1,0 +1,63 @@
+{extends file='layout/main.html'}
+{block name="main"}
+
+<div class="main_title">
+	<h2>后台用户列表</h2>
+	<p>用户列表及管理用户</p>
+</div>
+
+<div class="btn_blk">
+	<div class="fr">
+		<a href="#" class="btn2 fr ml20 del_all">删除</a>
+		<a href="?url=administrator/create" class="btn1 fr">新增</a>
+	</div>
+</div>
+<form action="?url=administrator/delete" method="post" accept-charset="utf-8" id="res_del">
+
+<table width="100%" class="table_list">
+	<tr>
+		<th width="55"><input type="checkbox" class="checkAll" rel="check[]"/></th>
+		<th width="40%">用户名</th>
+		<th>别名</th>
+		<th>所属用户组</th>
+		<th width="80">操作</th>
+	</tr>
+	{foreach $data as $val}
+	<tr{if $val@iteration % 2} class="odd"{/if}>
+		<td><input type="checkbox" name="check[]" value="{$val.id}"></td>
+		<td>{$val.name}{if $val.id == 1}(创始人){/if}</td>
+		<td>{$val.nickname}</td>
+		<td>
+				{foreach explode(',', $val.admin_group_id) as $v}
+					{get_info('admin_group', $v, 'name')}&nbsp;
+				{/foreach}
+		</td>
+		<td class="tc">
+			<a href="?url=administrator/update&id={$val.id}"><img src="{gen_theme_url('images/i.gif')}" class="ico_edit" title="编辑"></a>&nbsp;&nbsp;
+			<a href="?url=administrator/delete&id={$val.id}" class="delete"><img src="{gen_theme_url('images/i.gif')}" class="ico_del" title="删除"></a>
+		</td>
+	</tr>
+	{/foreach}
+
+</table>
+</form>
+<div class="btn_blk">
+	<div class="fr">
+		<a href="#" class="btn2 fr ml20 del_all">删除</a>
+		<a href="?url=model/create&action=model" class="btn1 fr">新增</a>
+		{include file="lib/pager.html"}
+	</div>
+
+</div>
+<script type="text/javascript" charset="utf-8">
+$('.del_all').click(function(){
+	var check = $(":checkbox:checked").size();
+	if (!check) {
+		alert('你还没有选择要删除的用户');
+		return false;
+	};
+	$("#res_del").submit();
+  return false;
+});
+</script>
+{/block}

@@ -1,0 +1,117 @@
+{include file="lib/header.html"}
+<!--main-->
+<div id="main">
+  {include file="lib/history.html"}
+	<div class="breadcrumb"><a href="#">首页</a> <img src="{gen_theme_url('images/i.png')}" class="ico"> <a href="#">类别</a> <img src="{gen_theme_url('images/i.png')}" class="ico"> <a href="#">列表</a> </div>
+	<div class="tips">
+		<div class="con">
+			<img src="{gen_theme_url('images/i.png')}" class="close">
+			<h3>提示!</h3>
+			<p>提示提示提示提示提示,提示提示提示提示提示提示提示提示,提示提示提示提示提示提示提示提示.提示提示提示提示提示提示提示提示.</p>
+		</div>
+	</div>
+	<div class="m10"><input name="" type="button" class="add"></div>
+	<div class="container m10">
+<form action="admin/index/xxx" method="post" accept-charset="utf-8">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	<thead>
+	<tr>
+		<th><input type="checkbox" class="checkAll" /></th>
+		<th>item <img src="{gen_theme_url('images/i.png')}" class="down"></th>
+		<th>item</th>
+		<th>item</th>
+		<th>item</th>
+		<th>item</th>
+		<th>item</th>
+	</tr>
+	</thead>
+	<tr>
+		<td><input type="checkbox" name="some_name[]" value="4"></td>
+		<td>itemitemitem</td>
+		<td>itemitemitem</td>
+		<td>itemitemitem</td>
+		<td>itemitemitem</td>
+		<td>itemitemitem</td>
+		<td><a href="#"><img src="{gen_theme_url('images/i.png')}" class="edit"></a> <a href="#"><img src="{gen_theme_url('images/i.png')}" class="del"></a></td>
+	</tr>
+	<tr>
+		<td><input type="checkbox" name="some_name[]" value="1"></td>
+		<td>itemitemitem</td>
+		<td>itemitemitem</td>
+		<td>itemitemitem</td>
+		<td>itemitemitem</td>
+		<td>itemitemitem</td>
+		<td><a href="#"><img src="{gen_theme_url('images/i.png')}" class="edit"></a> <a href="#"><img src="{gen_theme_url('images/i.png')}" class="del"></a></td>
+	</tr>
+	<tr>
+		<td><input type="checkbox" name="some_name[]" value="2"></td>
+		<td>itemitemitem</td>
+		<td>itemitemitem</td>
+		<td>itemitemitem</td>
+		<td>itemitemitem</td>
+		<td>itemitemitem</td>
+		<td><a href="#"><img src="{gen_theme_url('images/i.png')}" class="edit"></a> <a href="#"><img src="{gen_theme_url('images/i.png')}" class="del"></a></td>
+	</tr>
+	<tr>
+		<td><input type="checkbox" name="some_name[]" value="3"></td>
+		<td>itemitemitem</td>
+		<td>itemitemitem</td>
+		<td>itemitemitem</td>
+		<td>itemitemitem</td>
+		<td>itemitemitem</td>
+		<td><a href="#"><img src="{gen_theme_url('images/i.png')}" class="edit"></a> <a href="#"><img src="{gen_theme_url('images/i.png')}" class="del"></a></td>
+	</tr>
+	<tr>
+		<td><input type="checkbox" name="some_name[]" value="4" checked></td>
+		<td>itemitemitem</td>
+		<td>itemitemitem</td>
+		<td>itemitemitem</td>
+		<td>itemitemitem</td>
+		<td>itemitemitem</td>
+		<td><a href="#"><img src="{gen_theme_url('images/i.png')}" class="edit"></a> <a href="#"><img src="{gen_theme_url('images/i.png')}" class="del"></a></td>
+	</tr>
+	<tr>
+		<td><input type="checkbox" name="some_name[]" value="5"></td>
+		<td>itemitemitem</td>
+		<td>itemitemitem</td>
+		<td>itemitemitem</td>
+		<td>itemitemitem</td>
+		<td>itemitemitem</td>
+		<td><a href="#"><img src="{gen_theme_url('images/i.png')}" class="edit"></a> <a href="#"><img src="{gen_theme_url('images/i.png')}" class="del"></a></td>
+	</tr>
+	<tr>
+		<td><input type="checkbox" disabled="disabled"></td>
+		<td><input type="radio" name="xxx" value="0" disabled="disabled"></td>
+		<td><input type="radio" name="some_n" value="0" checked><input type="radio" name="some_n" value="2"><input type="radio" name="some_n" value="3"></td>
+		<td><input type="radio" name="some_2" value="0"><input type="radio" name="some_2" value="2"><input type="radio" name="some_2" value="3"></td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+</table>
+<script type="text/javascript" charset="utf-8">
+$('.checkAll').click(function(){
+  if (this.checked) {
+    $('input[name=some_name[]]').checkbox('off');
+  } else {
+    $('input[name=some_name[]]').checkbox('on');
+  }
+});
+</script>
+
+	</div>
+	<div class="m10">
+		<div class="pages fr">
+		<a href="#"><img src="{gen_theme_url('images/i.png')}" class="prev"></a> <a href="#">1</a> <a href="#">2</a> 3 <a href="#">4</a> <a href="#">5</a> <a href="#">&middot;</a> <a href="#">&middot;</a> <a href="#">&middot;</a> <a href="#">&middot;</a> <a href="#">&middot;</a> <a href="#">&middot;</a> <a href="#">&middot;</a> <a href="#">&middot;</a> <a href="#">445</a> <a href="#"><img src="{gen_theme_url('images/i.png')}" class="next"></a></div>
+		
+		<select name="xxx">
+		  <option value="1">option1</option>
+		  <option value="2" selected>option2</option>
+		</select>
+
+	</div>
+  	<p><input type="submit" value="Continue &rarr;"></p>
+  </form>
+</div>
+<!--/main-->
+{include file="lib/footer.html"}

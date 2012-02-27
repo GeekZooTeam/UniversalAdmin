@@ -1,0 +1,41 @@
+{extends file='layout/base.html'}
+{block name="container"}
+<h1 class="tac">米兰时尚婚纱我的订单</h1>
+<form action="list">
+	<div class="break_bar">
+		<input type="search" class="fr" name="seach_key" placeholder="搜索：姓名、电话、单号" />
+	</div>
+	<ul class="break_bar xxlarge">
+		{foreach $data as $val}
+		<li class="list">
+			<a href="">
+				<dl class="clearfix">
+					<dt class="fl mr10">
+					    <a href="step2?id={$val.id}" class="user">{$val.user}</a>
+					</dt>
+					<dd class="fl ml10"><em><a href="survey?id={$val.id}" class="phone">{$val.phone}</a></em></dd>
+					<dd class="fr ml10"><input type="button" value="详情" /></dd>
+				</dl>
+			</a>
+		</li>
+		{/foreach}
+	</ul>
+</form>
+<script type="text/javascript" charset="utf-8">
+	$("input[type='search']").keyup(function(){
+			var key = $(this).val();
+			if (key == '') {
+				$('.list').show();
+			} else {
+				$('.list').show();
+				$(".user").each(function(i){
+						if ($(this).html().indexOf(key) == -1 && $(".phone:eq("+i+")").html().indexOf(key) == -1) {
+							$(".user:eq("+i+")").parents('li').hide();
+						};;
+				});
+			};
+
+	});
+</script>
+{/block}
+

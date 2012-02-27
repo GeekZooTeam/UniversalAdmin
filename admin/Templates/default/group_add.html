@@ -1,0 +1,37 @@
+{include file="lib/header.html"}
+<!--main-->
+<div id="main">
+  {include file="lib/history.html"}
+	<div class="breadcrumb"><a href="?url=index">首页</a> <img src="{gen_theme_url('images/i.png')}" class="ico"> <a href="?url=group">用户组</a> <img src="{gen_theme_url('images/i.png')}" class="ico"> <a href="?url=group/create">创建用户组</a> </div>
+	<form action="?url=group/create" method="post" accept-charset="utf-8">
+	<div class="clearfix m10">
+		<div class="sidebar">
+			<div class="clearfix m10"><input type="button" class="fr btn_fb" onclick="submit()"></div>
+		</div>
+		<div class="center">
+			<div class="input_title mt10">
+				名称：<input name="group_name" type="text">
+			</div>
+			<div class="input_title mt10">
+			  {foreach Config::get('menu') as $val}
+			    <h3>{$val@key} :</h3>
+			    {foreach $val as $v}
+			      <p style="padding-left:10px">{$v.name} : 
+			      {foreach $v.action as $k=>$vv}
+			      <input type="checkbox" name="permission[{$v@key}][{$vv@key}]" value="{$k}" /> {$vv}
+  			    {/foreach}
+  			    </p>
+			    {/foreach}
+			  {/foreach}
+			</div>
+			<div class="input_title mt10">
+				{foreach $group_list as $val}
+					[{$val.name}：<input type="checkbox" name="append_group_id[]" value="{$val.id}" />]&nbsp;&nbsp;
+				{/foreach}
+			</div>
+		</div>
+	</div>
+	</form>
+</div>
+<!--/main-->
+{include file="lib/footer.html"}

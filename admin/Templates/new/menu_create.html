@@ -1,0 +1,80 @@
+{extends file='layout/main.html'}
+{block name="main"}
+<div class="main_title">
+	<h2>添加菜单</h2>
+	<p>菜单添加</p>
+</div>
+{if $info.id}
+<form action="?url=menu/update&id={$info.id}" method="post" accept-charset="utf-8">
+{else}
+<form action="?url=menu/create" method="post" accept-charset="utf-8">
+{/if}
+<div class="con_blk">
+  <h3 class="light_gray">菜单名称</h3>
+  <input name="info[name]" type="text" value="{$info.name}" class="text"/>
+</div>
+
+<div class="con_blk">
+  <h3 class="light_gray">菜单排序:</h3>
+  <input name="info[view_order]" type="text" value="{$info.view_order|default:0}" class="text"/>
+</div>
+
+<div class="clearfix">
+	<dl class="set_blk">
+		<dt class="light_gray">所属上级</dt>
+		<dd>
+		  <select name="info[parent_id]">
+		    <option value="0">无</option>
+		    {foreach $parent as $val}
+		    <option value="{$val.id}"{if $info.parent_id == $val.id} selected{/if}>{$val.name}</option>
+		    {/foreach}
+		  </select>
+		</dd>
+		<dt class="light_gray"{if not $info.parent_id} style="display:none"{/if}>链接</dt>
+		<dd{if not $info.parent_id} style="display:none"{/if}>
+		  <input type="text" value="{$info.url}" class="text fl" name="info[url]" />
+		  <span>
+		  <select name="help">
+	      {foreach Config::get('menu') as $val}
+	        {foreach $val as $v}
+	          <option value="{$v@key}"{if $info.url == $v} selected{/if}>{$v.name}</option>
+	        {/foreach}
+	      {/foreach}
+	    </select>
+	    </span>
+		</dd>
+	</dl>
+</div>
+
+<div class="clearfix">
+	<dl class="set_blk">
+		<dt class="light_gray">是否隐藏</dt>
+		<dd><input type="checkbox" name="info[is_hide]" value="1" rel="switch"{if $info.is_hide} checked {/if}/></dd>
+	</dl>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+  $('select[name="info[parent_id]"]').change(function(){
+    if (this.value > 0) {
+      $(this).parent().next().show();
+      $(this).parent().next().next().show();
+    } else {
+      $(this).parent().next().hide();
+      $(this).parent().next().next().hide();
+    }
+  });
+  $('select[name=help]').change(function(){
+    $('input[name="info[url]"]').val(this.value);
+  });
+</script>
+
+</form>
+
+<div class="btn_blk b_t">
+	<div class="fr">
+		<a href="#" class="btn2 fr ml20 cancel">取消</a>
+		<a href="#" class="btn1 fr save">确定</a>
+	</div>
+</div>
+
+{/block}

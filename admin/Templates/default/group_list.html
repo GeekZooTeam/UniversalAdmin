@@ -1,0 +1,25 @@
+{include file="lib/header.html"}
+<!--main-->
+<div id="main">
+  {include file="lib/history.html"}
+	<div class="breadcrumb"><a href="?url=index">首页</a> <img src="{gen_theme_url('images/i.png')}" class="ico"> <a href="?url=group">用户组</a> <img src="{gen_theme_url('images/i.png')}" class="ico"> <a href="?url=group">列表</a> </div>
+	<div class="m10"><input name="" type="button" class="add" onclick=window.location.href='?url=group/create'></div>
+	<div class="container m10">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	<thead>
+	<tr>
+		<th>用户组名称 <img src="{gen_theme_url('images/i.png')}" class="down"></th>
+		<th>操作</th>
+	</tr>
+	</thead>
+	{foreach $data as $val}
+	<tr>
+		<td>{$val.name}</td>
+		<td><a href="?url=administrator&group_id={$val.id}">查看组下的用户</a><a href="?url=group/update&id={$val.id}"><img src="{gen_theme_url('images/i.png')}" class="edit"></a> <a href="?url=group/delete&id={$val.id}" class="delete"><img src="{gen_theme_url('images/i.png')}" class="del"></a></td>
+	</tr>
+	{/foreach}
+</table>
+	</div>
+</div>
+<!--/main-->
+{include file="lib/footer.html"}

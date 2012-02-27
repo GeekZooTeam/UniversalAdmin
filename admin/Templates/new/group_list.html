@@ -1,0 +1,32 @@
+{extends file='layout/main.html'}
+{block name="main"}
+
+<div class="main_title">
+	<h2>用户组</h2>
+	<p>列表及管理</p>
+</div>
+
+<div class="btn_blk">
+	<div class="fr">
+		<a href="?url=group/create" class="btn1 fr">新增</a>
+	</div>
+</div>
+<table width="100%" class="table_list">
+	<tr>
+		<th width="70%">用户组名称</td>
+		<th>操作</td>
+	</tr>
+	{foreach $data as $val}
+	<tr{if $val@iteration % 2} class="odd"{/if}>
+		<td>{$val.name}</td>
+		<td class="tc"><a href="?url=administrator&group_id={$val.id}">查看组下的用户</a>&nbsp;&nbsp;<a href="?url=group/update&id={$val.id}"><img src="{gen_theme_url('images/i.gif')}" class="ico_edit" title="编辑"></a>&nbsp;&nbsp;<a href="?url=group/delete&id={$val.id}" class="delete"><img src="{gen_theme_url('images/i.gif')}" class="ico_del" title="删除"></a></td>
+	</tr>
+	{/foreach}
+</table>
+<div class="btn_blk">
+	<div class="fr">
+		<a href="?url=group/create" class="btn1 fr">新增</a>
+	</div>
+
+</div>
+{/block}

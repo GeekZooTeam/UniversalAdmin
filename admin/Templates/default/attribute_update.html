@@ -1,0 +1,43 @@
+{include file="lib/header.html"}
+<!--main-->
+<div id="main">
+  {include file="lib/history.html"}
+<form action="?url=model/update" method="post" accept-charset="utf-8">
+	<input type="hidden" name="action" value="attribute">
+	<input type="hidden" name="info[model_id]" value="{$data.model_id}">
+	<input type="hidden" name="id" value="{$data.id}">
+	<div class="breadcrumb"><a href="?url=index">首页</a> <img src="{gen_theme_url('images/i.png')}" class="ico"> <a href="?url=model&action=attribute&mid={$data.model_id}">模型字段列表</a> <img src="{gen_theme_url('images/i.png')}" class="ico"> <a href="javascript://">字段编辑</a> </div>
+	
+	<div class="clearfix m10">
+		
+		<div class="sidebar">
+			<div class="m10">
+				属性类别：<select name="info[type]">
+				  <option value="input" {if $data.type == 'input'}selected{/if}>input</option>
+				  <option value="file" {if $data.type == 'file'}selected{/if}>file</option>
+				  <option value="text" {if $data.type == 'text'}selected{/if}>text</option>
+				  <option value="select" {if $data.type == 'select'}selected{/if}>select</option>
+				  <option value="checkbox" {if $data.type == 'checkbox'}selected{/if}>checkbox</option>
+				
+				</select>
+			</div>
+			<div class="clearfix m10"><input name="" type="button" class="fr btn_fb" onclick="submit()"></div>
+		</div>
+		<div class="center">
+			<div class="input_title">
+			属性名称：<input name="info[name]" type="text" value="{$data.name}">
+			</div>
+			<div class="input_title">
+			属性排序：<input name="info[view_order]" type="text" value="{$data.view_order}">
+			</div>
+			<div class="input_con mt10">
+				<div>属性值：<textarea name="info[value]" cols="" rows="">{$data.value}</textarea></div>
+				<div class="input_con_b"></div>
+			</div>
+		</div>
+	</div>
+	</form>	
+</div>
+<!--/main-->
+
+{include file="lib/footer.html"}

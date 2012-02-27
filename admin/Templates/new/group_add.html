@@ -1,0 +1,52 @@
+{extends file='layout/main.html'}
+{block name="main"}
+<div class="main_title">
+	<h2>添加用户组</h2>
+</div>
+<form action="?url=group/create" method="post" accept-charset="utf-8">
+
+<div class="con_blk">
+  <h3 class="light_gray">名称</h3>
+	<input name="group_name" type="text" class="text">
+</div>
+
+
+<div class="con_blk">
+ <h3 class="light_gray">权限</h3>
+{foreach Config::get('menu') as $val}
+<div class="clearfix">
+	<dl class="set_blk">
+		<dt class="light_gray">{$val@key}</dt>
+		{foreach $val as $v}
+			{foreach $v.action as $k=>$vv}
+		    <dd><input type="checkbox" name="permission[{$v@key}][{$vv@key}]" value="{$k}"> {$vv}</dd>
+		  {/foreach}
+	  {/foreach}
+	</dl>
+</div>
+{/foreach}
+</div>
+
+
+<div class="con_blk">
+ <h3 class="light_gray">相关组</h3>
+	<div class="clearfix">
+		<dl class="set_blk">
+			<dt class="light_gray">相关组</dt>
+				{foreach $group_list as $val}
+					<dd><input type="checkbox" name="append_group_id[]" value="{$val.id}"  />{$val.name}</dd>
+				{/foreach}
+		</dl>
+	</div>
+</div>
+
+</form>
+
+<div class="btn_blk b_t">
+	<div class="fr">
+		<a href="#" class="btn2 fr ml20 cancel">取消</a>
+		<a href="#" class="btn1 fr save">确定</a>
+	</div>
+</div>
+
+{/block}

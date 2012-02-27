@@ -1,0 +1,71 @@
+{extends file='layout/base.html'}
+{block name="selected"}{/block}
+{block name="container"}
+<script type="text/javascript" charset="utf-8">
+$('.nav li:eq(2)').addClass('current');
+</script>
+	<h1 class="tac">{$model_info.alias_name}</h1>
+	<form action="{$action}" method="post" id="submit_ass">
+		<input type="hidden" name="mid" value="{$mid}">
+		<input type="hidden" name="step_res_id" value="{$step_res_id}">
+		<input type="hidden" name="status" value="0">
+		{foreach $attribute as $val}
+		<div{if !($val@iteration % 3)} class="break_bar" {/if}>
+			{if $val.type=='input'}
+						<label for="{$val.name}">{$val.name}</label>
+						<input type="text" name="attribute[{$val.id}]" placeholder="{$val.value}" />
+			{elseif $val.type=='text'}
+						<label for="{$val.name}">{$val.name}</label>
+						<textarea name="attribute[{$val.id}]" cols="50" rows="6"></textarea>
+			{elseif $val.type=='checkbox'}
+						<label>{$val.name}</label>
+						{foreach $val.value as $v}
+					    <input type="checkbox" name="attribute[{$val.id}][]" value="{$v}" /> {$v}
+					  {/foreach}
+			{elseif $val.type=='select'}
+						<label>{$val.name}</label>
+			      <select name="attribute[{$val.id}]" />
+						  {foreach $val.value as $v}
+						    <option value="{$v}">{$v}</option>
+						  {/foreach}
+						</select>
+			{elseif $val.type=='date'}
+					<label>{$val.name}</label>
+					<select name="attribute[{$val.id}][y]">
+						<option>年</option>
+						{for $i=date('Y')+1;$i>1930;$i--}
+						<option value="{$i}">{$i}</option>
+						{/for}
+
+					</select>
+					<select name="attribute[{$val.id}][m]">
+						<option>月</option>
+						{for $i=1; $i <= 12; $i++}
+							<option value="{$i}">{$i}</option>
+						{/for}
+					</select>
+					<select name="attribute[{$val.id}][d]">
+						<option>日</option>
+						{for $i=1; $i <= 31; $i++}
+							<option value="{$i}">{$i}</option>
+						{/for}
+					</select>
+			{elseif $val.type=='model'}
+						<label>{$val.name}</label>
+			      <select name="attribute[{$val.id}]">
+						  {foreach $val.value as $v}
+						    <option value="{$v@key}">{$v}</option>
+						  {/foreach}
+						</select>
+			{/if}
+
+			</div>
+		{/foreach}
+
+  	<div class="break_bar_top clearfix xxlarge">
+  		<input type="button" value="完成" class="fr mt20 ml20" onclick="$('#submit_ass').submit()" />  <input type="button" value="变订单" class="fr mt20" onclick="window.location.href='step2_1.html?id={$info['订单状态']}'" />
+  	</div>
+
+	</form>
+
+{/block}

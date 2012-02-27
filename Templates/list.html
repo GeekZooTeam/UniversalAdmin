@@ -1,0 +1,98 @@
+{extends file='layout/base.html'}
+{block name="selected"}{/block}
+{block name="container"}
+
+<script type="text/javascript" charset="utf-8">
+{if $type == 1}
+$('.nav li:eq(3)').addClass('current');
+{elseif $type == 2}
+$('.nav li:eq(1)').addClass('current');
+{else}
+$('.nav li:eq(2)').addClass('current');
+{/if}
+</script>
+
+
+<h1 class="tac">米兰时尚婚纱我的{if $type == 1}订单{elseif $type == 2}客户{else}调查表{/if}</h1>
+<form action="list">
+  <input type="hidden" name="type" value="{$type}" />
+	<div class="break_bar">
+		<input type="search" class="fr" name="seach_key" placeholder="搜索：姓名、电话、单号" />
+	</div>
+</form>
+	<ul class="break_bar xxlarge">
+	  {if $type == 1}
+	  {foreach $data as $val}
+		<li class="list">
+			<a href="">
+				<dl class="clearfix">
+					<dt class="fl mr10">
+					    <a href="entry?id={$val.id}" class="user">{$val.user}</a>
+					</dt>
+					<dd class="fl ml10"><em><a href="entry?id={$val.id}" class="phone">{$val.phone}</a></em></dd>
+					<dd class="fr ml10"><input type="button" value="详情" onclick="location.href='entry?id={$val.id}';"/></dd>
+				</dl>
+			</a>
+		</li>
+		{/foreach}
+	  {elseif $type == 2}
+      {foreach $data as $val}
+  		<li class="list">
+  			<a href="">
+  				<dl class="clearfix">
+  					<dt class="fl mr10">
+  					    <a href="{if !$val.status}step2?id={$val.id}{$val.id}{else}step4?id={$val.id}{/if}" class="user">{$val.user}</a>
+  					</dt>
+  					<dd class="fl ml10"><em><a href="{if !$val.status}step2?id={$val.id}{$val.id}{else}step4?id={$val.id}{/if}" class="phone">{$val.phone}</a></em></dd>
+
+  					<dd class="fr ml10"><input type="button" value="删除" onclick="location.href='list/delete?id={$val.id}&type={$type}';"/></dd>
+  					{if !$val.status}
+  					<dd class="fr ml10"><input type="button" value="填订单" onclick="location.href='step2?id={$val.id}';"/></dd>
+  					{else}
+  					<dd class="fr ml10"><input type="button" value="调查表" onclick="location.href='step4?id={$val.id}';"/></dd>
+  					{/if}
+  				</dl>
+  			</a>
+  		</li>
+  		{/foreach}
+		{else}
+		{foreach $data as $val}
+		<li class="list">
+			<a href="">
+				<dl class="clearfix">
+					<dt class="fl mr10">
+					    <a href="survey?id={$val.id}" class="user">{$val.user}</a>
+					</dt>
+					<dd class="fl ml10"><em><a href="survey?id={$val.id}" class="phone">{$val.phone}</a></em></dd>
+					<dd class="fr ml10">
+					    <input type="button" value="死单" onclick="if (confirm('确认更改状态？')) location.href='list/delete?id={$val.id}';"/>
+					</dd>
+					<dd class="fr ml10"><input type="button" value="可能" class="mr10" /></dd>
+					<dd class="fr ml10 fnt_red">{$val.feedback}</dd>
+					<dt class="fr ml10">状态：</dt>
+				</dl>
+			</a>
+		</li>
+		{/foreach}
+		{/if}
+	</ul>
+
+<script type="text/javascript" charset="utf-8">
+	$("input[type='search']").keyup(function(){
+			var key = $(this).val();
+			if (key == '') {
+				$('.list').show();
+			} else {
+				$('.list').show();
+				$(".user").each(function(i){
+						if ($(this).html().indexOf(key) == -1 && $(".phone:eq("+i+")").html().indexOf(key) == -1) {
+							$(".user:eq("+i+")").parents('li').hide();
+						};;
+				});
+			};
+
+	});
+	
+</script>
+{/block}
+

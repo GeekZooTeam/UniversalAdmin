@@ -1,0 +1,143 @@
+{extends file='layout/main.html'}
+{block name="main"}
+
+<div class="main_title">
+	<h2>{$model_info.alias_name}-列表</h2>
+	<p>{$model_info.detail}</p>
+</div>
+
+<form action="" method="get" id="search">
+	<input type="hidden" name="url" value="{$admin_action}" />
+	<input type="hidden" name="mid" value="{$smarty.get.mid}" />
+
+	<div class="clearfix">
+		<ul class="top_set_blk clearfix">
+		{foreach $attribute_search as $val}
+			{if ($val.type==input || $val.type==text || $val.type=='model') && !$val.is_search_hide}
+		<li>
+		<dl class="set_blk">
+			<dt>{$val.name}：</dt>
+			<dd>
+			<input type="text" name="search[{$val.name}]" class="text fl" value="{$smarty.get.search[{$val.name}]}"/>
+		  </dd>
+		</dl>
+		</li>
+		  {elseif $val.type=='checkbox' && !$val.is_search_hide}
+		<li>
+		<dl class="set_blk">
+			<dt>{$val.name}：</dt>
+			{foreach $val.value as $v}
+		    <dd><input type="checkbox" name="search[{$val.name}][]" value="{$v}" {if $smarty.get.search[{$val.name}]}{if in_array($v, $smarty.get.search[{$val.name}])} checked {/if}{/if}>{$v}</dd>
+      {/foreach}
+	  </dl>
+		</li>
+		  {elseif $val.type=='select' && !$val.is_search_hide}
+		<li>
+		<dl class="set_blk">
+			<dt>{$val.name}：</dt>
+			<dd>
+				<select name="search[{$val.name}]">
+					<option value="">不限</option>
+				  {foreach $val.value as $v}
+				    <option value="{$v}" {if $smarty.get.search[{$val.name}]==$v} selected {/if}>{$v}</option>
+				  {/foreach}
+				</select>
+		  </dd>
+		</dl>
+		</li>
+		  {elseif $val.type=='date'  && !$val.is_search_hide}
+		<li>
+		<dl class="set_blk">
+			<dt>{$val.name}：</dt>
+			<dd>
+			<input type="text" name="search[{$val.name}]" class="text fl datepicker" value="{$smarty.get.search[{$val.name}]}"/>
+		  </dd>
+		</dl>
+		</li>
+		  
+		  {/if}
+		{/foreach}
+		
+		<li>
+		<dl class="set_blk">
+			<dd><a href="javascript:$('form')[0].submit()" class="btn1 fl">搜索</a></dd>
+		</dl>
+		</li>
+			
+		</ul>
+	</div>
+</form>
+
+<div class="btn_blk clearfix">
+	<div class="fr">
+		<a href="#" class="btn1 fr ml20 export_execl">导出EXECL</a>
+		<a href="#" class="btn2 fr ml20 del_all">删除</a>
+		<a href="?url={$admin_action}/create&mid={$mid}" class="btn1 fr">新增</a>
+	</div>
+</div>
+
+<form action="?url={$admin_action}/delete" method="post" accept-charset="utf-8" id="res_del">
+<table width="100%" class="table_list">
+	<tr>
+		<th width="55"><input type="checkbox" class="checkAll" rel="check[]"/></th>
+		{foreach $attribute as $val}
+			{if !$val.is_hide}
+				<th>{$val.name}</th>
+			{/if}
+		{/foreach}
+		<th width="150">添加时间</th>
+		<th width="80">操作</th>
+	</tr>
+	
+	{foreach $data as $val}
+	<tr{if $val@iteration % 2} class="odd"{/if}>
+		<td><input type="checkbox" name="check[]" value="{$val.id}"></td>
+			{foreach $attribute as $v}
+				{if !$v.is_hide}
+  				{if $v.type == 'model'}
+  				  <td><a href="?url=resource&res_id={get_attribute_value($val.id, $v.name)}">{get_attribute_value(get_attribute_value($val.id, $v.name), $v['value'][1])}</a></td>				  
+  				{else}
+  				  <td>{substr_fix(get_attribute_value($val.id, $v.name), 30)}</td>
+  				{/if}	
+  			{/if}
+			{/foreach}
+		<td>{date('Y-m-d h:i:s', $val.add_time)}</td>
+		<td><a href="?url={$admin_action}/update&id={$val.id}"><img src="{gen_theme_url('images/i.gif')}" class="ico_edit" title="编辑"></a>&nbsp;&nbsp;<a href="?url={$admin_action}/delete&id={$val.id}" class="delete"><img src="{gen_theme_url('images/i.gif')}" class="ico_del" title="删除"></a></td>
+	</tr>
+	{/foreach}
+</table>
+</form>
+
+<div class="btn_blk clearfix">
+	<div class="fr">
+		<a href="#" class="btn1 fr ml20 export_execl">导出EXECL</a>
+		<a href="#" class="btn2 fr ml20 del_all">删除</a>
+		<a href="?url={$admin_action}/create&mid={$mid}" class="btn1 fr">新增</a>
+	</div>
+	{include file="lib/pager.html"}
+</div>
+
+<script type="text/javascript" charset="utf-8">
+$('.del_all').click(function(){
+	var check = $(":checkbox:checked").size();
+	if (!check) {
+		alert('你还没有选择要删除的内容');
+		return false;
+	};
+	$("#res_del").submit();
+  return false;
+});
+
+$('.export_execl').click(function(){
+	// $('input[name=url]').val('resource/export');
+	
+	//$('#search').attr('action', '{$smarty.const.SITE_URL}/?url=resource/export');
+	// alert($('#search').attr('action'));
+	// $('#search').submit();
+	var href = location.href.split('?url=resource').pop();
+	var jumt = '{$smarty.const.SITE_URL}/?url=resource/export';
+	location.href = jumt+href;
+});
+</script>
+
+{/block}

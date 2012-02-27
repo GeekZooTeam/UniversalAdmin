@@ -1,0 +1,46 @@
+{extends file='layout/main.html'}
+{block name="main"}
+<div class="main_title">
+	<h2>添加后台用户</h2>
+</div>
+<form action="?url=administrator/update" method="post" accept-charset="utf-8">
+	<input type="hidden" name="id" value="{$data.id}">
+
+<div class="con_blk">
+  <h3 class="light_gray">用户名</h3>
+	<input name="info[name]" type="text" class="text" value="{$data.name}">
+</div>
+
+<div class="con_blk">
+  <h3 class="light_gray">别名</h3>
+	<input name="info[nickname]" type="text" class="text" value="{$data.nickname}">
+</div>
+
+<div class="con_blk">
+  <h3 class="light_gray">密码（不更改请不要填写）</h3>
+	<input name="info[password]" type="password" class="text">
+</div>
+
+
+<div class="con_blk">
+ <h3 class="light_gray">相关组</h3>
+	<div class="clearfix">
+		<dl class="set_blk">
+			<dt class="light_gray">相关组</dt>
+				{foreach $group_list as $val}
+					<dd><input type="checkbox" name="admin_group_id[]" value="{$val.id}" {if $data.admin_group_id}{if in_array($val.id, $data.admin_group_id)} checked {/if}{/if} />{$val.name}</dd>
+				{/foreach}
+		</dl>
+	</div>
+</div>
+
+</form>
+
+<div class="btn_blk b_t">
+	<div class="fr">
+		<a href="#" class="btn2 fr ml20 cancel">取消</a>
+		<a href="#" class="btn1 fr save">确定</a>
+	</div>
+</div>
+
+{/block}

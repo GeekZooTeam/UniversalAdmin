@@ -1,0 +1,22 @@
+{include file="lib/header.html"}
+<!--main-->
+<div id="main">
+  {include file="lib/history.html"}
+	<div class="breadcrumb"><a href="?url=index">首页</a> <img src="{gen_theme_url('images/i.png')}" class="ico"> <a href="?url=model">模型</a> <img src="{gen_theme_url('images/i.png')}" class="ico"> <a href="javascript://">更新模型</a> </div>
+	<form action="?url=model/update" method="post" accept-charset="utf-8">
+		<input type="hidden" name="action" value="model">
+		<input type="hidden" name="id" value="{$data.id}">
+	<div class="clearfix m10">
+		<div class="sidebar">
+			<div class="clearfix m10"><input name="" type="button" class="fr btn_fb" onclick="submit()"></div>
+		</div>
+		<div class="center">
+			<div class="input_title">
+				模型名称：<input name="name" type="text" value="{$data.name}">
+			</div>
+		</div>
+	</div>
+	</form>
+</div>
+<!--/main-->
+{include file="lib/footer.html"}

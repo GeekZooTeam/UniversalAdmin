@@ -1,0 +1,15 @@
+{extends file='layout/base.html'}
+{block name="container"}
+<h1 class="tac">米兰时尚婚纱影楼登录页面</h1>
+<form action="login" id="submit" method="post">
+	<div>
+		<label for="用户名">用户名</label>
+		<input type="text" name="uname" tabindex="1" placeholder="用户名">
+	</div>
+	<div class="break_bar">
+		<label for="密码">密码</label>
+		<input type="password" name="password" tabindex="1" placeholder="密码">
+	</div>
+	<a href="javascript://" class="btn_order fr" onclick="$('#submit').submit();">登陆</a>
+</form>
+{/block}

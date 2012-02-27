@@ -1,0 +1,13 @@
+{extends file='layout/base.html'}
+{block name="container"}
+{$ifjump}
+	<div class="message clearfix">
+		{if empty($jumpurl)}
+		<h1 class="fnt_red"><span class="error"></span>操作失败</h1>
+		{else}
+		<h1 class="fnt_blue"><span class="succ"></span>操作成功</h1>
+		{/if}
+		{if empty($jumpurl)} <a href="{$smarty.session.LAST_URL}" class="btn_order fr">返回重试</a> {else} <a href="{$jumpurl}" class="btn_order fr">确认继续</a> {/if}
+		<h3>{$msg}</h3>
+	</div>
+{/block}

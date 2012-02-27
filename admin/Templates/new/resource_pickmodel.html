@@ -1,0 +1,21 @@
+{extends file='layout/main.html'}
+{block name="main"}
+
+<div class="main_title">
+	<h2>模型列表</h2>
+	<p>选择你要添加内容的模型</p>
+</div>
+
+
+<ul class="model_list clearfix">
+	{foreach $data as $val}
+	<li>
+		<img src="{gen_theme_url('images/model_icon.png')}" alt="" class="fl" />
+		<h1>{$val.alias_name}</h1>
+		<h3 class="gray">{substr_fix($val.detail, 30)}.</h3>
+		<p><a href="?url=resource/create&mid={$val.id}">添加内容</a><a href="?url=resource&mid={$val.id}">查看内容</a></p>
+	</li>
+	{/foreach}
+</ul>
+
+{/block}

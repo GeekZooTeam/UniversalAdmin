@@ -1,0 +1,724 @@
+{extends file='layout/main.html'}
+{block name="main"}
+<script type="text/javascript" src="/js/chart/highcharts.js"></script>
+
+
+<div class="main_title">
+	<h2>数据统计</h2>
+	<p>查看论坛近况，并且可以查看到您安装了那些插件，板块的活跃度等等</p>
+</div>
+
+<style type="text/css">
+
+	
+	div.graph
+	{
+		width: 200px;
+		height: 150px;
+		border: 1px dashed gainsboro;
+	}
+	.data_title{ padding:20px 0; font-size:16px; font-weight:700}
+	.data_list { margin:0; padding:0 0 20px 0}
+	.data_list li{ float:left; width:33%; padding:10px 0}
+	.data_list li .bc{ margin:0 auto}
+	.data_list2 { margin:0; padding:0 0 20px 0}
+	.data_list2 li{ float:left; width:200px; color:#4C4C4C}
+	.data_list2 .green{ color:#B6CA75}
+	.data_list2 .red{ color:#92393F}
+	.data_list3 { margin:0; padding:0 0 20px 0}
+	.data_list3 li{ float:left; width:50%; padding:10px 0}
+	.data_list3 li .bc{ margin:0 auto}
+</style>
+<div class="clearfix">
+<div class="set_blk ">
+	<div class="fl"> <a class="btn2 ml20 fl {if !$smarty.get.t}curent{/if}" href="?url=statistics" >周统计</a> <a class="btn2 ml20 fl {if $smarty.get.t==1}curent{/if}" href="?url=statistics&t=1">月统计</a> <a class="btn2 ml20 fl {if $smarty.get.t==2}curent{/if}" href="?url=statistics&t=2">年统计</a></div>
+</div>
+</div>
+			
+
+{$j = 0}
+{$s_num = 0}
+{$t_num = 0}
+{$j_num = 0}
+{$w_num = 0}
+
+{$view=array('周','月','年')}
+
+{foreach $user_group as $value}
+	{$j = $value.coin_count+$j}
+	{$s_num = $value.s_num+$s_num}
+	{$t_num = $value.t_num+$t_num}
+	{$j_num = $value.j_num+$j_num}
+	{$w_num = $value.w_num+$w_num}
+{/foreach}
+<h3 class="data_title">文字统计标题</h3>
+<ul class="data_list2 clearfix">
+	<li>本{$view[intval($smarty.get.t)]}订单总数：<strong class="green">{$t_num}</strong></li>
+	<li>本{$view[intval($smarty.get.t)]}死单总数：<strong class="green">{$s_num}</strong></li>
+	<li>本{$view[intval($smarty.get.t)]}救活单总数：<strong class="green">{$j_num}</strong></li>
+	<li>本{$view[intval($smarty.get.t)]}未处理单总数：<strong class="green">{$w_num}</strong></li>
+</ul>
+
+<h3 class="data_title">3{$view[intval($smarty.get.t)]}内销售额对比</h3>
+<ul class="data_list2 clearfix">
+	<li>本{$view[intval($smarty.get.t)]}总销售额统计：<strong class="green">{$j}</strong></li>
+	<li>前1{$view[intval($smarty.get.t)]}总销售额统计：<strong class="green">{$out_last1.coin_count}</strong></li>
+	<li>前2{$view[intval($smarty.get.t)]}总销售额统计：<strong class="green">{$out_last2.coin_count}</strong></li>
+</ul>
+
+<script type="text/javascript">
+
+	var chart;
+	$(document).ready(function() {
+		chart = new Highcharts.Chart({
+			chart: {
+				renderTo: 'container_q_1',
+				defaultSeriesType: 'column'
+			},
+			title: {
+				text: '3{$view[intval($smarty.get.t)]}内单总数'
+			},
+			xAxis: {
+				categories: [
+					// '总销售额统计', 
+					'订单总数',
+					'死单总数',
+					'救活单总数',
+					'未处理单总数',
+				]
+			},
+			yAxis: {
+				min: 0,
+				title: {
+					text: ''
+				}
+			},
+			legend: {
+				layout: 'vertical',
+				backgroundColor: '#FFFFFF',
+				align: 'left',
+				verticalAlign: 'top',
+				x: 100,
+				y: 70,
+				floating: true,
+				shadow: true
+			},
+			tooltip: {
+				formatter: function() {
+					return ''+
+						this.x +': '+ this.y +' 单';
+				}
+			},
+			plotOptions: {
+				column: {
+					pointPadding: 0.2,
+					borderWidth: 0
+				}
+			},
+		        series: [{
+				name: '本{$view[intval($smarty.get.t)]}',
+				data: [{$t_num},{$s_num},{$j_num},{$w_num}]
+		
+			}, {
+				name: '前1{$view[intval($smarty.get.t)]}',
+				data: [{$out_last1.odd_conut.t_num},{$out_last1.odd_conut.s_num},{$out_last1.odd_conut.j_num},{$out_last1.odd_conut.w_num}]
+		
+			}, {
+				name: '前2{$view[intval($smarty.get.t)]}',
+				data: [{$out_last2.odd_conut.t_num},{$out_last2.odd_conut.s_num},{$out_last2.odd_conut.j_num},{$out_last2.odd_conut.w_num}]
+		
+			}]
+		});
+		
+		
+	});
+		
+</script>
+
+<div id="container_q_1" style="width: 900px; height: 400px; margin: 0 auto"></div>
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+	var chart;
+	$(document).ready(function() {
+		chart = new Highcharts.Chart({
+			chart: {
+				renderTo: 'kk_1',
+				defaultSeriesType: 'column',
+				margin: [ 50, 50, 100, 80]
+			},
+			title: { text: '业绩比较' },
+			xAxis: {
+				categories: [
+				{foreach $user_group as $value}
+					'{$value['小组名称']}',
+				{/foreach}
+				],
+				labels: {
+					rotation: -45,
+					align: 'right',
+					style: {
+						 font: 'normal 13px Verdana, sans-serif'
+					}
+				}
+			},
+			yAxis: {
+				min: 0,
+				title: {
+					text: '金额'
+				}
+			},
+			legend: {
+				enabled: false
+			},
+			tooltip: {
+				formatter: function() {
+					return '<b>'+ this.x +'</b><br/>'+
+						 '组总金额: '+ Highcharts.numberFormat(this.y, 1) ;
+				}
+			},
+		        series: [{
+				name: 'Population',
+				data: [
+					{foreach $user_group as $value}
+						{$value.coin_count},
+					{/foreach}
+				],
+				dataLabels: {
+					enabled: true,
+					rotation: -90,
+					color: '#FFFFFF',
+					align: 'right',
+					x: -3,
+					y: 10,
+					formatter: function() {
+						return this.y;
+					},
+					style: {
+						font: 'normal 13px Verdana, sans-serif'
+					}
+				}			
+			}]
+		});
+	});
+		
+</script>
+<div id="kk_1" style="width: 900px; height: 400px; margin: 0 auto"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{foreach $user_group as $key=>$value}
+
+<script type="text/javascript">
+	var chart;
+	$(document).ready(function() {
+		chart = new Highcharts.Chart({
+			chart: {
+				renderTo: 'container_{$key}',
+				defaultSeriesType: 'column',
+				margin: [ 50, 50, 100, 80]
+			},
+			title: { text: '{$value['小组名称']}内人员业绩比较' },
+			xAxis: {
+				categories: [
+				{foreach $value.user as $val}
+					'{$val['员工姓名']}',
+				{/foreach}
+				],
+				labels: {
+					rotation: -45,
+					align: 'right',
+					style: {
+						 font: 'normal 13px Verdana, sans-serif'
+					}
+				}
+			},
+			yAxis: {
+				min: 0,
+				title: {
+					text: '金额'
+				}
+			},
+			legend: {
+				enabled: false
+			},
+			tooltip: {
+				formatter: function() {
+					return '<b>'+ this.x +'</b><br/>'+
+						 '组总金额: '+ Highcharts.numberFormat(this.y, 1) ;
+				}
+			},
+		        series: [{
+				name: 'Population',
+				data: [
+					{foreach $value.user as $val}
+						{$val.coin_count},
+					{/foreach}
+				],
+				dataLabels: {
+					enabled: true,
+					rotation: -90,
+					color: '#FFFFFF',
+					align: 'right',
+					x: -3,
+					y: 10,
+					formatter: function() {
+						return this.y;
+					},
+					style: {
+						font: 'normal 13px Verdana, sans-serif'
+					}
+				}			
+			}]
+		});
+	});
+		
+</script>
+<div id="container_{$key}" style="width: 900px; height: 400px; margin: 0 auto"></div>
+{/foreach}
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+	var chart;
+	$(document).ready(function() {
+		chart = new Highcharts.Chart({
+			chart: {
+				renderTo: 'all_user',
+				defaultSeriesType: 'column',
+				margin: [ 50, 50, 100, 80]
+			},
+			title: { text: '全部人员业绩比较' },
+			xAxis: {
+				categories: [
+				{foreach $user_group as $value}
+					{foreach $value.user as $val}
+					'{$val['员工姓名']}',
+					{/foreach}
+				{/foreach}
+				],
+				labels: {
+					rotation: -45,
+					align: 'right',
+					style: {
+						 font: 'normal 13px Verdana, sans-serif'
+					}
+				}
+			},
+			yAxis: {
+				min: 0,
+				title: {
+					text: '金额'
+				}
+			},
+			legend: {
+				enabled: false
+			},
+			tooltip: {
+				formatter: function() {
+					return '<b>'+ this.x +'</b><br/>'+
+						 '组总金额: '+ Highcharts.numberFormat(this.y, 1) ;
+				}
+			},
+		        series: [{
+				name: 'Population',
+				data: [
+					{foreach $user_group as $value}
+						{foreach $value.user as $val}
+						{$val.coin_count},
+						{/foreach}
+					{/foreach}
+				],
+				dataLabels: {
+					enabled: true,
+					rotation: -90,
+					color: '#FFFFFF',
+					align: 'right',
+					x: -3,
+					y: 10,
+					formatter: function() {
+						return this.y;
+					},
+					style: {
+						font: 'normal 13px Verdana, sans-serif'
+					}
+				}			
+			}]
+		});
+	});
+		
+</script>
+<div id="all_user" style="width: 900px; height: 400px; margin: 0 auto"></div>
+
+
+
+
+
+
+
+
+
+
+<h3 class="data_title">小组成交率</h3>
+<ul class="data_list3 clearfix">
+{foreach $user_group as $key=>$value}
+{if $value.t_num}
+<script type="text/javascript">
+
+	var chart;
+	$(document).ready(function() {
+		chart = new Highcharts.Chart({
+			chart: {
+				renderTo: 'chengjiaolv_{$key}',
+				plotBackgroundColor: null,
+				plotBorderWidth: null,
+				plotShadow: false
+			},
+			title: {
+				text: '{$value['小组名称']}成交率'
+			},
+			tooltip: {
+				formatter: function() {
+					return '<b>'+ this.point.name +'</b>: '+ this.y +' %';
+				}
+			},
+			plotOptions: {
+				pie: {
+					allowPointSelect: true,
+					cursor: 'pointer',
+					dataLabels: {
+						enabled: true,
+						color: '#000000',
+						connectorColor: '#000000',
+						formatter: function() {
+							return '<b>'+ this.point.name +'</b>: '+ this.y +' %';
+						}
+					}
+				}
+			},
+		    series: [{
+				type: 'pie',
+				name: 'Browser share',
+				data: [
+					{if $value.t_num!=0}
+						{$ll = number_format(($value.t_num-$value.s_num-$value.w_num)/$value.t_num, 2)*100}
+					{else}
+						{$ll=0}
+					{/if}
+					['成功',   {$ll}],
+					['失败',   {100-$ll}],
+				]
+			}]
+		});
+	});
+		
+</script>
+
+
+<li><div id="chengjiaolv_{$key}" style="width: 400px; height: 300px; margin: 0 auto"></div></li>
+
+{/if}
+{/foreach}
+</ul>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+	var chart;
+	$(document).ready(function() {
+		chart = new Highcharts.Chart({
+			chart: {
+				renderTo: 'all_user_pie',
+				defaultSeriesType: 'column',
+				margin: [ 50, 50, 100, 80]
+			},
+			title: { text: '全部人员成交率比较' },
+			xAxis: {
+				categories: [
+				{foreach $user_group as $value}
+					{foreach $value.user as $val}
+					'{$val['员工姓名']}',
+					{/foreach}
+				{/foreach}
+				],
+				labels: {
+					rotation: -45,
+					align: 'right',
+					style: {
+						 font: 'normal 13px Verdana, sans-serif'
+					}
+				}
+			},
+			yAxis: {
+				min: 0,
+				title: {
+					text: '金额'
+				}
+			},
+			legend: {
+				enabled: false
+			},
+			tooltip: {
+				formatter: function() {
+					return '<b>'+ this.x +'</b><br/>'+
+						 Highcharts.numberFormat(this.y, 1)+'%' ;
+				}
+			},
+		        series: [{
+				name: 'Population',
+				data: [
+					{foreach $user_group as $value}
+						{foreach $value.user as $val}
+							{if $val['odd_conut'].t_num != 0}
+								{$ll = number_format(($val['odd_conut'].t_num-$val['odd_conut'].s_num-$val['odd_conut'].w_num)/$val['odd_conut'].t_num, 2)*100}
+								{$ll},
+							{else}
+								0,
+							{/if}
+						{/foreach}
+					{/foreach}
+				],
+				dataLabels: {
+					enabled: true,
+					rotation: -90,
+					color: '#FFFFFF',
+					align: 'right',
+					x: -3,
+					y: 10,
+					formatter: function() {
+						return this.y;
+					},
+					style: {
+						font: 'normal 13px Verdana, sans-serif'
+					}
+				}			
+			}]
+		});
+	});
+		
+</script>
+<div id="all_user_pie" style="width: 900px; height: 400px; margin: 0 auto"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h3 class="data_title">小组救活率</h3>
+<ul class="data_list3 clearfix">
+
+{foreach $user_group as $key=>$value}
+{if $value.t_num}
+<script type="text/javascript">
+
+	var chart;
+	$(document).ready(function() {
+		chart = new Highcharts.Chart({
+			chart: {
+				renderTo: 'zhuanhuan_{$key}',
+				plotBackgroundColor: null,
+				plotBorderWidth: null,
+				plotShadow: false
+			},
+			title: {
+				text: '{$value['小组名称']}救活率'
+			},
+			tooltip: {
+				formatter: function() {
+					return '<b>'+ this.point.name +'</b>: '+ this.y +' %';
+				}
+			},
+			plotOptions: {
+				pie: {
+					allowPointSelect: true,
+					cursor: 'pointer',
+					dataLabels: {
+						enabled: true,
+						color: '#000000',
+						connectorColor: '#000000',
+						formatter: function() {
+							return '<b>'+ this.point.name +'</b>: '+ this.y +' %';
+						}
+					}
+				}
+			},
+		    series: [{
+				type: 'pie',
+				name: 'Browser share',
+				data: [
+					{if ($value.s_num+$value.w_num+$value.j_num)!=0}
+						{$ll = number_format($value.j_num/($value.s_num+$value.w_num+$value.j_num), 2)*100}
+					{else}
+						{$ll=0}
+					{/if}
+					['成功',   {$ll}],
+					['失败',   {100-$ll}],
+				]
+			}]
+		});
+	});
+		
+</script>
+<li><div id="zhuanhuan_{$key}" style="width: 400px; height: 300px; margin: 0 auto"></div></li>
+
+
+{/if}
+{/foreach}
+</ul>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+	var chart;
+	$(document).ready(function() {
+		chart = new Highcharts.Chart({
+			chart: {
+				renderTo: 'all_user_pie_2',
+				defaultSeriesType: 'column',
+				margin: [ 50, 50, 100, 80]
+			},
+			title: { text: '全部人员救活率' },
+			xAxis: {
+				categories: [
+				{foreach $user_group as $value}
+					{foreach $value.user as $val}
+					'{$val['员工姓名']}',
+					{/foreach}
+				{/foreach}
+				],
+				labels: {
+					rotation: -45,
+					align: 'right',
+					style: {
+						 font: 'normal 13px Verdana, sans-serif'
+					}
+				}
+			},
+			yAxis: {
+				min: 0,
+				title: {
+					text: '金额'
+				}
+			},
+			legend: {
+				enabled: false
+			},
+			tooltip: {
+				formatter: function() {
+					return '<b>'+ this.x +'</b><br/>'+
+						 Highcharts.numberFormat(this.y, 1)+'%' ;
+				}
+			},
+		        series: [{
+				name: 'Population',
+				data: [
+					{foreach $user_group as $value}
+						{foreach $value.user as $val}
+							{if ($val.odd_conut.s_num+$val.odd_conut.w_num+$val.odd_conut.j_num) != 0}
+								{$ll=number_format($val.odd_conut.j_num/($val.odd_conut.s_num+$val.odd_conut.w_num+$val.odd_conut.j_num), 2)*100}
+								{$ll},
+							{else}
+								0,
+							{/if}
+						{/foreach}
+					{/foreach}
+				],
+				dataLabels: {
+					enabled: true,
+					rotation: -90,
+					color: '#FFFFFF',
+					align: 'right',
+					x: -3,
+					y: 10,
+					formatter: function() {
+						return this.y;
+					},
+					style: {
+						font: 'normal 13px Verdana, sans-serif'
+					}
+				}			
+			}]
+		});
+	});
+		
+</script>
+<div id="all_user_pie_2" style="width: 900px; height: 400px; margin: 0 auto"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+				
+<div class="btn_blk b_t clearfix">
+	<div class="fr"> <a class="btn2  ml20 fr" href="?url=resource/create&amp;mid=9">取消</a> <a class="btn2 fr ml20 del_all" href="#">删除</a> <a class="btn1 fr ml20" href="#">编辑</a></div>
+</div>
+	
+
+{/block}

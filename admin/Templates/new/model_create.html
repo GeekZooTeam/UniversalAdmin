@@ -1,0 +1,31 @@
+{extends file='layout/main.html'}
+{block name="main"}
+<div class="main_title">
+	<h2>添加模型</h2>
+	<p>添加模型</p>
+</div>
+<form action="?url=model/create" method="post" accept-charset="utf-8">
+<input type="hidden" name="action" value="model">
+<div class="con_blk">
+	<h3 class="light_gray">唯一标识</h3>
+	<input name="name" type="text" class="text">
+</div>
+<div class="con_blk">
+	<h3 class="light_gray">别名</h3>
+	<input name="alias_name" type="text" class="text">
+</div>
+<div class="con_blk">
+	<h3 class="light_gray">内容</h3>
+	<textarea name="detail" cols="" rows="6"></textarea>
+</div>
+
+</form>
+
+<div class="btn_blk b_t">
+	<div class="fr">
+		<a href="#" class="btn2 fr ml20 cancel">取消</a>
+		<a href="#" class="btn1 fr save">确定</a>
+	</div>
+</div>
+
+{/block}

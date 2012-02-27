@@ -1,0 +1,1050 @@
+/*--------------------------------------------------------------------------------------------------
+.............................................. Geek Zoo Team .......................................
+....................................................................................................
+.......................................... Copyright (c) 2007-2010 .................................
+....................................................................................................
+....................................................................................................
+....................................................................................................
+....................................................................................................
+..........................................--------------------......................................
+....................................-::/+ossyhhhhhhhhhhhhhhyysoo//:--...............................
+................................-/+oyhddddddddddddddddddddddddddddhys+/:............................
+............................-:+sydddddddddddddddddddddddddddddddddddddhhso/.........................
+..........................-/yhdddddddddddddddddddddddddddddddddddddddddddddyo:-.....................
+........................-oydddddddddddddddddddddhhhhhhhhhhdddddddddddddddddddho/-...................
+......................:+sdddddddddddddddhyso++//::::::::::/++osshhdddddddddddddhs/-.................
+....................-:hdddddddddddddyo/:--..`````........`````.--:/oshdddddddddddhy/-...............
+...................-ohddddddddddhy+:.................................-+shddddddddddh+:..............
+..................:shdddddddddho/`......................................:oydddddddddhy--............
+................./odddddddddhs:.`..........................................oydddddddddy+............
+...............-:ydddddddddh:-`.............................................:+hddddddddy+...........
+..............-/yddddddddds-..................................................+sddddddddh-..........
+............--yhddddddddd+:...................................................`:sdddddddds/.........
+...........-+yddddddddddh.........................................-//+//:-......-ydddddddds-........
+...........oyddddddddddy+......................................./+yhhddhhso-.....+sdddddddy/........
+.........-:dddhhdddddddo:.....................................--hddddddddddo/....-/dddddddho-.......
+.........+yddhyhddddddd+....................................../sddddddddddddo.....-hdddddddh-.......
+........:sdds/yhddddddy/....................................../sddddddddddddo.....-shddddddd:.......
+.......-ohddo.yhddddddy/......................-osyyyyyso-.....-/dddddddddddy+.....-ohddddddd:.......
+.......-ydds/.yhddddddy/......................-yhddddddy:.......+shddddddhy.......-ohddddddd:.......
+.......:ddd/:.yhddddddy/......................-yhddddddy:.......`.-+ooo+/-........-ohddddddd:.......
+.......:ddd:-.yhddddddh/......................-yhddddddy:..........``````.........-ohddddddd:.......
+.......:ddd...oyddddddd+......................-yhddddddy:.........................-shddddddd:.......
+.......:ddd:-.+sddddddds/.....................-yhddddddy:.........................-ydddddddd:.......
+.......:ddd/-.-+dddddddhy.....................-yhddddddy:.........................:dddddddhy-.......
+.......-yhdo:../ddddddddd:-...................-yhddddddy:........................:+dddddddy+-.......
+.......-+hdy/..:oddddddddys+++++++++++++++++++ohdddddddy:........................+sddddddds-........
+........:shh+...-hdddddddddddddddddddddddddddddddddddddy:.......................-ydddddddy+.........
+.........-:+:....syddddddddddddddddddddddddddddddddddddy:......................-+hddddddd/:.........
+...........`.....-+ddddddddddddddddddddddddddddddddddddy:.....................-/hddddddhs...........
+..................-shddddddddddddddddddddddddddddddddddy:.....................+ohhhhhhh+-...........
+...................-oyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyys-....................+ohhhhhhh+-............
+....................````````````````````````````````````............................................
+....................................................................................................
+....................................................................................................
+....................................................................................................
+....................................................................................................
+....................................................................................................
+------------------------------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------- 
+  
+   Geek-Zoo CSS Framework 0.1.1a
+   http://www.geek-zoo.com
+
+   * Copyright (c) 2007-2011.
+   * This Framework only for Geek-zoo Official Site
+   * Geek Zoo Team
+   
+   || July 2009			         ||
+   || Last modified on Mar. 2011 || 
+   
+-------------------------------------------------------------- */
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+
+@font-face {
+	font-family: 微软雅黑, "Microsoft YaHei", 黑体, STHeiti, Hei;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+ul {
+	list-style: none;
+}
+
+blockquote, q {
+	quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+a {
+	margin: 0;
+	padding: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+
+ins {
+	background-color: #ff9;
+	color: #000;
+	text-decoration: none;
+}
+
+mark {
+	background-color: #ff9;
+	color: #000;
+	font-style: italic;
+	font-weight: bold;
+}
+
+del {
+	text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+	border-bottom: 1px dotted;
+	cursor: help;
+}
+
+/* tables still need cellspacing="0" in the markup */
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid #ccc;
+	margin: 1em 0;
+	padding: 0;
+}
+
+input, select {
+	vertical-align: middle;
+}
+
+/* END RESET CSS */
+
+/* fonts.css from the YUI Library: developer.yahoo.com/yui/
+   Refer to developer.yahoo.com/yui/3/cssfonts/ for font sizing percentages
+   
+   There are three custom edits:
+   * remove arial, helvetica from explicit font stack
+   * we normalize monospace styles ourselves
+   * table font-size is reset in the HTML5 reset above so there is no need to repeat
+*/
+
+body {
+	font: 12px/1.231 sans-serif;
+	background: url(../images/bg.png) repeat;
+	 -webkit-text-size-adjust: 100%; /* Stops Mobile Safari from auto-adjusting font-sizes */
+}
+
+/* hack retained to preserve specificity */
+
+select, input, textarea, button {
+	font: 99% sans-serif;
+}
+
+/* normalize monospace sizing 
+ * en.wikipedia.org/wiki/MediaWiki_talk:Common.css/Archive_11#Teletype_style_fix_for_Chrome
+ */
+
+pre, code, kbd, samp {
+	font-family: monospace, sans-serif;
+}
+
+/* 
+ * minimal base styles 
+ */
+
+body, select, input, textarea {
+	/*
+
+#444 looks better than black: twitter.com/H_FJ/statuses/11800719859 */ 
+  color: #444;
+/* s
+
+et your base font here, to apply evenly */
+  
+
+/* f
+
+ont-family: Georgia, serif;  */
+}
+
+/* Headers (h1,h2,etc) have no default font-size or margin,
+   you'll want to define those yourself. */
+
+h1,h2,h3,h4,h5,h6 {
+	font-weight: bold;
+}
+
+/* always force a scrollbar in non-IE */
+
+html {
+	overflow-y: scroll;
+}
+
+/* Accessible focus treatment: people.opera.com/patrickl/experiments/keyboard/test */
+
+a:hover, a:active {
+	outline: none;
+}
+
+a, a:active, a:visited {
+	color: #FFF;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #FFF;
+	text-decoration: underline;
+}
+
+ul, ol {
+	margin-left: 0;
+}
+
+ol {
+	list-style-type: decimal;
+}
+
+/* Remove margins for navigation lists */
+
+nav ul, nav li {
+	margin: 0;
+}
+
+small {
+	font-size: 85%;
+}
+
+strong, th {
+	font-weight: bold;
+}
+
+td, td img {
+	vertical-align: top;
+}
+
+sub {
+	vertical-align: sub;
+	font-size: smaller;
+}
+
+sup {
+	vertical-align: super;
+	font-size: smaller;
+}
+
+pre {
+	padding: 15px;
+	/*
+
+www.pathf.com/blogs/2008/05/formatting-quoted-code-in-blog-posts-css21-white-space-pre-wrap/ */
+  white-space: pre;
+	/* C
+
+SS2 */
+  white-space: pre-wrap;
+	/* CSS
+
+2.1 */
+  white-space: pre-line;
+	/* CSS 3
+
+(and 2.1 as well, actually) */
+  word-wrap: break-word;
+/* IE */
+}
+
+textarea {
+	overflow: auto;
+}
+
+/* thnx ivannikolic! www.sitepoint.com/blogs/2010/08/20/ie-remove-textarea-scrollbars/ */
+
+.ie6 legend, .ie7 legend {
+	margin-left: -7px;
+}
+
+/* thnx ivannikolic! */
+
+/* align checkboxes, radios, text inputs with their label
+   by: Thierry Koblentz tjkdesign.com/ez-css/css/base.css  */
+
+input[type="radio"] {
+	vertical-align: text-bottom;
+}
+
+input[type="checkbox"] {
+	vertical-align: text-bottom;
+}
+
+.ie7 input[type="checkbox"] {
+	vertical-align: baseline;
+}
+
+.ie6 input[type="radio"] {
+	vertical-align: bottom;
+}
+
+/* hand cursor on clickable input elements */
+
+label, input[type=button], input[type=submit], button {
+	cursor: pointer;
+}
+
+/* webkit browsers add a 2px margin outside the chrome of form elements */
+
+button, input, select, textarea {
+	margin: 0;
+}
+
+/* colors for form validity */
+
+input:valid, textarea:valid {
+	
+}
+
+input:invalid, textarea:invalid {
+	border-radius: 1px;
+	-moz-box-shadow: 0px 0px 5px red;
+	-webkit-box-shadow: 0px 0px 5px red;
+	box-shadow: 0px 0px 5px red;
+}
+
+.no-boxshadow input:invalid, 
+.no-boxshadow textarea:invalid {
+	background-color: #CCC;
+}
+
+/* These selection declarations have to be separate.
+   No text-shadow: twitter.com/miketaylr/status/12228805301 
+   Also: hot pink. */
+
+::-moz-selection {
+	background: #6db8eb;
+	color: #fff;
+	text-shadow: none;
+}
+
+::selection {
+	background: #6db8eb;
+	color: #fff;
+	text-shadow: none;
+}
+
+/*  j.mp/webkit-tap-highlight-color */
+
+a:link {
+	-webkit-tap-highlight-color: #6db8eb;
+}
+
+/* make buttons play nice in IE:    
+   www.viget.com/inspire/styling-the-button-element-in-internet-explorer/ */
+
+button {
+	width: auto;
+	overflow: visible;
+}
+
+/* 
+ * Non-semantic helper classes 
+ */
+
+/* for image replacement */
+
+.ir {
+	display: block;
+	text-indent: -999em;
+	overflow: hidden;
+	background-repeat: no-repeat;
+	text-align: left;
+	direction: ltr;
+}
+
+/* Hide for both screenreaders and browsers
+   css-discuss.incutio.com/wiki/Screenreader_Visibility */
+
+.hidden {
+	display: none;
+	visibility: hidden;
+}
+
+/* Hide only visually, but have it available for screenreaders 
+   www.webaim.org/techniques/css/invisiblecontent/  &  j.mp/visuallyhidden  */
+
+.visuallyhidden {
+	position: absolute !important;
+	clip: rect(1px 1px 1px 1px);
+	/*
+
+IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+/* Hide visually and from screenreaders, but maintain layout */
+
+.invisible {
+	visibility: hidden;
+}
+
+/* >> The Magnificent CLEARFIX: Updated to prevent margin-collapsing on child elements << j.mp/bestclearfix */
+
+.clearfix:before, .clearfix:after {
+    content: "\0020";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+/* Fix clearfix: blueprintcss.lighthouseapp.com/projects/15318/tickets/5-extra-margin-padding-bottom-of-page */
+
+.clearfix {
+    zoom: 1;
+}
+
+/* Primary Styles
+    Author: Donglin@geek-zoo.com
+*/
+
+/*Header----------------------------------------------------------------------------------*/
+
+body {
+	width: 100%;
+	margin: 0 auto;
+	position: relative;
+	overflow: hidden;
+	text-shadow: 0px 1px 0px #ffffff;
+	filter: dropshadow(color=#ffffff, offx=0, offy=1);
+}
+
+.container {
+	margin: 12px 12px 12px 71px;
+	background: url(../images/content_bg.png) repeat;
+	-webkit-box-shadow: 0px 3px 4px #080808;
+	-moz-box-shadow: 0px 3px 4px #080808;
+	box-shadow: 0px 3px 4px #080808;
+	padding: 60px 30px 40px;
+}
+
+.container label {
+	width: 100px;
+	float: left;
+}
+
+.ribbon {
+	background: url(../images/ribon.png) no-repeat;
+	height: 30px;
+	width: 100%;
+	left: 42px;
+	top: 30px;
+	position: absolute;
+}
+
+form {
+	padding: 30px 0 0 0;
+}
+
+form div {
+	padding-bottom: 3em;
+	width: 100%;
+	margin-bottom: 2em;
+}
+
+label {
+	padding-right: 3em;
+	line-height: 100%;
+}
+
+select {
+	margin-right: 1em;
+}
+
+.break_bar {
+	border-bottom: 1px solid #cfcfcf;
+	-webkit-box-shadow: 0px 1px 0px #ffffff;
+	-moz-box-shadow: 0px 1px 0px #ffffff;
+	box-shadow: 0px 1px 0px #ffffff;
+	margin-bottom: 40px;
+}
+
+.break_bar_nm {
+	border-bottom: 1px solid #cfcfcf;
+	-webkit-box-shadow: 0px 1px 0px #ffffff;
+	-moz-box-shadow: 0px 1px 0px #ffffff;
+	box-shadow: 0px 1px 0px #ffffff;
+	margin-bottom: 10px;
+	padding: 30px 0 0 0;
+}
+
+.break_bar_top {
+	border-top: 1px solid #FFF;
+	-webkit-box-shadow: 0px -1px 0px #cfcfcf;
+	-moz-box-shadow: 0px -1px 0px #cfcfcf;
+	box-shadow: 0px -1px 0px #cfcfcf;
+}
+
+.print_list {
+	margin: 0 20px 10px 20px;
+	padding: 30px 0;
+}
+
+.print_list dt, .print_list dd {
+	height: 40px;
+	float: left;
+	line-height: 40px;
+	margin-right: 20px;
+}
+
+.print_list dt {
+	text-align: right;
+	color: #9e9e9e;
+}
+
+.w100 {
+	width: 70px;
+}
+
+.w200 {
+	width: 120px;
+	text-align: center;
+}
+
+.w300 {
+	width: 170px;
+}
+
+.w400 {
+	width: 210px;
+}
+
+.w600 {
+	width: 450px;
+}
+
+.comments {
+	padding: 10px 0;
+}
+
+.comments li {
+	padding: 20px 0;
+	border-bottom: 1px solid #d9d9d9;
+}
+
+.comments li:last-child {
+	border-bottom: none;
+}
+
+.btn_order {
+	background: url(../images/gadgets.png) -1px -287px;
+	width: 181px;
+	height: 44px;
+	display: block;
+	font-size: 26px;
+	color: #FFF;
+	text-decoration: none;
+	text-align: center;
+	line-height: 44px;
+	text-shadow: 0px -1px 0px #003366;
+	filter: dropshadow(color=#003366, offx=0, offy=-1);
+}
+
+.btn_order:hover {
+	text-decoration: none;
+	color: #FFF;
+}
+
+.clear_btn {
+	background: url(../images/clear_btn.png) no-repeat;
+	height: 12px;
+	width: 12px;
+}
+
+.bounce_running {
+	-webkit-animation-name: bounce_open;
+	-webkit-animation-duration: 2s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-direction: alternate}
+	@-webkit-keyframes bounce_open{
+		from{margin-top: -5000px;}
+		to{margin-top: 0px;}
+		}
+
+.bounce_uping {
+	-webkit-animation-name: bounce_close;
+	-webkit-animation-duration: 200s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-direction: alternate}
+	@-webkit-keyframes bounce_close{
+		from{margin-top: 0px;}
+		to{margin-top: -999999px;}
+		}
+
+
+.nav {
+	width: 50px;
+	margin-top: 90px;
+	padding-left: 10px;
+	margin-left: 11px;
+}
+
+.nav li {
+	width: 50px;
+	text-indent: -99999px;
+	height: 60px;
+}
+
+.nav li.current {
+	background: url(../images/content_tab.png) no-repeat;
+}
+
+.nav li a.sales, .nav li a.survey, .nav li a.stat, .nav li a.setting, .nav li a.list {
+	background: url(../images/gadgets.png) no-repeat;
+	width: 27px;
+	height: 40px;
+	display: block;
+	margin-left: 10px;
+	margin-top: 30px;
+}
+
+.nav li.current a.sales, .nav li.current a.survey, .nav li.current a.stat, .nav li.current a.setting, .nav li.current a.list {
+	margin-left: 20px;
+}
+
+.nav li a.sales {
+	background-position: -1px -1px;
+}
+
+.nav li.current a.sales {
+	background-position: -1px -53px;
+}
+
+.nav li a.survey {
+	background-position: -43px -31px;
+}
+
+.nav li.current a.survey {
+	background-position: -43px -87px;
+}
+
+.nav li a.stat {
+	background-position: -114px -95px;
+}
+
+.nav li.current a.stat {
+	background-position: -114px -166px;
+}
+
+.nav li a.setting {
+	background-position: -154px -135px;
+}
+
+.nav li.current a.setting {
+	background-position: -155px -200px;
+}
+
+.nav li a.list {
+	background-position: -80px -62px;
+}
+
+.nav li.current a.list {
+	background-position: -80px -122px;
+}
+
+.btn_add {
+	background: url(../images/gadgets.png) no-repeat -183px 0px;
+	width: 35px;
+	height: 36px;
+	display: block;
+	text-indent: -9999px;
+}
+
+ul.break_bar li, ul.break_bar_top li {
+	border-bottom: 1px solid #e4e4e4;
+	-webkit-box-shadow: 0px 1px 0px #ffffff;
+	-moz-box-shadow: 0px 1px 0px #ffffff;
+	box-shadow: 0px 1px 0px #ffffff;
+	height: 50px;
+	overflow: hidden;
+	margin: 20px 0;
+}
+
+ul.break_bar li:last-child, ul.break_bar_top li:last-child {
+	border: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+ul.break_bar a, ul.break_bar a:hover {
+	color: #333;
+}
+
+/*Widgets---------------------------------------------------------------------------------*/
+
+h1 {
+	text-shadow: 0px 2px 0px #FFF;
+	filter: dropshadow(color=#FFF, offx=0, offy=2);
+	color: #444;
+	font-size: 28px;
+	line-height: 40px;
+}
+
+.fnt_red {
+	color: #b01800;
+}
+
+.fnt_green {
+	color: #91b978;
+}
+
+.gray {
+	color: #666;
+}
+
+.italic {
+	font-style: italic;
+}
+
+.fnt_white {
+	color: #FFF;
+}
+
+.light_gray {
+	color: #999;
+}
+
+.large {
+	font-size: 14px;
+	line-height: 22px;
+}
+
+.slarge {
+	font-size: 1.8em;
+	line-height: 2em;
+}
+
+.xlarge {
+	font-size: 2.4em;
+	line-height: 24px;
+}
+
+input {
+	padding: 4px 0;
+	font-size: 1em;
+}
+
+.xxlarge {
+	font-size: 18px;
+	line-height: 28px;
+}
+
+.small {
+	font-size: 11px;
+	line-height: 18px;
+}
+
+.xsmall {
+	font-size: 10px;
+	line-height: 16px;
+}
+
+.xxsmall {
+	font-size: 9px;
+	line-height: 14px;
+}
+
+.fl {
+	float: left;
+}
+
+.fr {
+	float: right;
+}
+
+.tar {
+	text-align: right;
+}
+
+.tal {
+	text-align: left;
+}
+
+.tac {
+	text-align: center;
+}
+
+.none_indent {
+	text-indent: 0px;
+}
+
+.text_indent {
+	text-indent: 8px;
+	font-size: 11px;
+}
+
+.text_indent_40 {
+	text-indent: 40px;
+}
+
+.lh20 {
+	line-height: 20px;
+}
+
+.lh30 {
+	line-height: 30px;
+}
+
+.lh40 {
+	line-height: 40px;
+}
+
+.lh44 {
+	line-height: 44px;
+}
+
+.mr10 {
+	margin-right: 10px;
+}
+
+.mr30 {
+	margin-right: 30px;
+}
+
+.ml10 {
+	margin-left: 10px;
+}
+
+.ml20 {
+	margin-left: 20px;
+}
+
+.pt20 {
+	padding-top: 20px;
+}
+
+.mt10 {
+	margin-top: 10px;
+}
+
+.mt20 {
+	margin-top: 20px;
+}
+
+.pb20 {
+	padding-bottom: 20px;
+}
+
+.mlr20 {
+	margin: 0 20px;
+}
+
+.h44 {
+	line-height: 44px;
+	height: 44px;
+}
+
+/*
+ * Media queries for responsive design
+ * These follow after primary styles so they will successfully override. 
+ */
+
+@media all and (orientation:portrait) {
+
+/* Style adjustments for portrait mode goes here */
+
+}
+
+@media all and (orientation:landscape) {
+
+/* Style adjustments for landscape mode goes here */
+
+}
+
+/* Grade-A Mobile Browsers (Opera Mobile, iPhone Safari, Android Chrome)  
+   Consider this: www.cloudfour.com/css-media-query-for-mobile-is-fools-gold/ */
+
+/*@media screen and (max-device-width: 100%) {
+
+  html { -webkit-text-size-adjust:none; -ms-text-size-adjust:none; }
+
+}*/
+
+@media screen and (-webkit-max-device-pixel-ratio:1) { 
+	
+
+}
+
+/* 
+ * print styles
+ * inlined to avoid required HTTP connection www.phpied.com/delay-loading-your-print-css/ 
+ */
+
+@media print {
+
+* {
+	background: transparent !important;
+	color: #000 !important;
+	text-shadow: none !important;
+}
+
+.container {
+    margin: 0;
+    background: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    padding: 0 0 0 40px;
+    width: 800px;
+}
+
+.break_bar {
+    border-bottom: 1px solid #444;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    margin-bottom: 40px;
+}
+
+.break_bar_nm {
+    border-bottom: 1px solid #444;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    margin-bottom: 10px;
+    padding: 30px 0 0 0;
+}
+
+.break_bar_top {
+    border-top: 1px solid #444;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.print_list {
+    margin: 0 20px 10px 20px;
+    padding: 30px 0;
+}
+
+.print_list dt, .print_list dd {
+    height: 40px;
+    float: left;
+    line-height: 40px;
+    margin-right: 20px;
+    color: #000;
+}
+
+.print_list dt {
+    text-align: right;
+}
+
+.w100 {
+    width: 100px;
+}
+
+.w200 {
+    width: 150px;
+    text-align: center;
+}
+
+.w300 {
+    width: 200px;
+}
+
+.w400 {
+    width: 300px;
+}
+
+.w600 {
+    width: 480px;
+}
+
+.footer {
+	display: none;
+}
+
+a, a:visited {
+	color: #444 !important;
+	text-decoration: underline;
+}
+
+a:after {
+	content: " (" attr(href) ")";
+}
+
+abbr:after {
+	content: " (" attr(title) ")";
+}
+
+.ir a:after {
+	content: "";
+}
+
+/* Don't show links for images */
+
+pre, blockquote {
+	border: 1px solid #999;
+	page-break-inside: avoid;
+}
+
+thead {
+	display: table-header-group;
+}
+
+/* css-discuss.incutio.com/wiki/Printing_Tables */
+
+tr, img {
+	page-break-inside: avoid;
+}
+  @page { margin: 0.5cm; }
+
+p, h2, h3 {
+	orphans: 3;
+	widows: 3;
+}
+
+h2, h3 {
+	page-break-after: avoid;
+}
+
+}

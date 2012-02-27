@@ -1,0 +1,130 @@
+{extends file='layout/main.html'}
+{block name="main"}
+<div class="main_title">
+	<h2>编辑订单</h2>
+</div>
+<form action="?url=order_manage/update" method="post" accept-charset="utf-8"  enctype="multipart/form-data">
+	<input type="hidden" name="mid" value="{$mid}">
+	<input type="hidden" name="rid" value="{$res_info.id}">
+{foreach $attribute as $val}
+	{if $val.type==input}
+		<div class="con_blk">
+		  <h3 class="light_gray">{$val.name}</h3>
+			<input type="text" name="attribute[{$val.name}]" class="text" value="{get_attribute_value($res_info.id, $val.name)}" />
+		</div>
+	{elseif $val.type==text}
+	<div class="con_blk">
+		<h3 class="light_gray">{$val.name}</h3>
+		<textarea name="attribute[{$val.name}]" cols="" rows="6">{get_attribute_value($res_info.id, $val.name)}</textarea>
+	</div>
+	{elseif $val.type==checkbox}
+		<div class="clearfix">
+			<dl class="set_blk">
+				<dt class="light_gray">{$val.name}</dt>
+				{foreach $val.value as $v}
+			    <dd><input type="checkbox" name="attribute[{$val.name}][]" value="{$v}" {if in_array($v, explode(',', get_attribute_value($res_info.id, $val.name)))} checked {/if}> {$v}</dd>
+			  {/foreach}
+			</dl>
+		</div>
+	{elseif $val.type==select}
+		<div class="clearfix">
+			<dl class="set_blk">
+				<dt class="light_gray">{$val.name}</dt>
+				<dd>
+		      <select name="attribute[{$val.name}]">
+					  {foreach $val.value as $v}
+					    <option value="{$v}" {if get_attribute_value($res_info.id, $val.name)==$v}selected{/if}>{$v}</option>
+					  {/foreach}
+					</select>
+				</dd>
+			</dl>
+		</div>
+	{elseif $val.type=='password'}
+		<div class="con_blk">
+		  <h3 class="light_gray">{$val.name}</h3>
+			<input type="password" name="attribute[{$val.name}]" class="text" value="{get_attribute_value($res_info.id, $val.name)}"/>
+			{if $val.is_unique}
+				（*唯一）
+			{/if}
+		</div>
+	{elseif $val.type=='date'}
+		<div class="con_blk">
+		<h3 class="light_gray">{$val.name}</h3>
+		<input type="text" name="attribute[{$val.name}]" class="text datepicker" value="{get_attribute_value($res_info.id, $val.name)}" />
+		</div>
+	{elseif $val.type=='model'}
+		<div class="clearfix">
+			<dl class="set_blk">
+				<dt class="light_gray">{$val.name}</dt>
+				<dd>
+					{if $val.is_unique}
+						<span>（*唯一）</span>
+					{/if}
+		      <select name="attribute[{$val.name}]">
+					  {foreach $val.value as $v}
+					  <option value="{$v@key}" {if get_attribute_value($res_info.id, $val.name)==$v@key}selected{/if}>{$v}</option>
+					  {/foreach}
+					</select>
+				</dd>
+			</dl>
+		</div>
+	{/if}
+{/foreach}
+
+{foreach $attribute2 as $val}
+	{if $val.type==input}
+		<div class="con_blk">
+		  <h3 class="light_gray">{$val.name}</h3>
+			<input type="text" name="attribute2[{$val.name}]" class="text" value="{get_attribute_value($res_id_2, $val.name)}" />
+		</div>
+	{elseif $val.type==text}
+	<div class="con_blk">
+		<h3 class="light_gray">{$val.name}</h3>
+		<textarea name="attribute2[{$val.name}]" cols="" rows="6">{get_attribute_value($res_id_2, $val.name)}</textarea>
+	</div>
+	{elseif $val.type==checkbox}
+		<div class="clearfix">
+			<dl class="set_blk">
+				<dt class="light_gray">{$val.name}</dt>
+				{foreach $val.value as $v}
+			    <dd><input type="checkbox" name="attribute2[{$val.name}][]" value="{$v}" {if in_array($v, explode(',', get_attribute_value($res_id_2, $val.name)))} checked {/if}> {$v}</dd>
+			  {/foreach}
+			</dl>
+		</div>
+	{elseif $val.type==select}
+		<div class="clearfix">
+			<dl class="set_blk">
+				<dt class="light_gray">{$val.name}</dt>
+				<dd>
+		      <select name="attribute2[{$val.name}]">
+					  {foreach $val.value as $v}
+					    <option value="{$v}" {if get_attribute_value($res_id_2, $val.name)==$v}selected{/if}>{$v}</option>
+					  {/foreach}
+					</select>
+				</dd>
+			</dl>
+		</div>
+	{elseif $val.type=='password'}
+		<div class="con_blk">
+		  <h3 class="light_gray">{$val.name}</h3>
+			<input type="password" name="attribute2[{$val.name}]" class="text" value="{get_attribute_value($res_id_2, $val.name)}"/>
+			{if $val.is_unique}
+				（*唯一）
+			{/if}
+		</div>
+	{elseif $val.type=='date'}
+		<div class="con_blk">
+		<h3 class="light_gray">{$val.name}</h3>
+		<input type="text" name="attribute2[{$val.name}]" class="text datepicker" value="{get_attribute_value($res_id_2, $val.name)}" />
+		</div>
+	{/if}
+{/foreach}
+</form>
+
+<div class="btn_blk b_t">
+	<div class="fr">
+		<a href="#" class="btn2 fr ml20 cancel">取消</a>
+		<a href="#" class="btn1 fr save">确定</a>
+	</div>
+</div>
+{/block}

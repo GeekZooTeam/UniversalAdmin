@@ -1,0 +1,24 @@
+<table border="1">
+	<tr>
+		{foreach $attribute as $val}
+			{if !$val.is_hide}
+				<th>{$val.name}</th>
+			{/if}
+		{/foreach}
+		<th>添加时间</th>
+	</tr>
+	{foreach $data as $val}
+		<tr>
+			{foreach $attribute as $v}
+				{if !$v.is_hide}
+  				{if $v.type == 'model'}
+  				  <td>{get_attribute_value(get_attribute_value($val.id, $v.name), $v['value'][1])}</td>				  
+  				{else}
+  				  <td>{substr_fix($val[$v.name], 30)}</td>
+  				{/if}	
+  			{/if}
+			{/foreach}
+		<td>{date('Y-m-d h:i:s', $val.add_time)}</td>
+	</tr>
+	{/foreach}
+</table>

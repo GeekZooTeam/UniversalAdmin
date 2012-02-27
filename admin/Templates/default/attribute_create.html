@@ -1,0 +1,43 @@
+{include file="lib/header.html"}
+
+<!--main-->
+<div id="main">
+  {include file="lib/history.html"}
+<form action="?url=model/create" method="post" accept-charset="utf-8">
+	<input type="hidden" name="action" value="attribute">
+	<input type="hidden" name="info[model_id]" value="{$mid}">
+	<div class="breadcrumb"><a href="?url=index">首页</a> <img src="{gen_theme_url('images/i.png')}" class="ico"> <a href="?url=model">模型</a> <img src="{gen_theme_url('images/i.png')}" class="ico"> <a href="javascript://">添加模型属性</a> </div>
+	
+	<div class="clearfix m10">
+		
+		<div class="sidebar">
+			<div class="m10">
+				属性类别：<select name="info[type]">
+				  <option value="input">input</option>
+				  <option value="file">file</option>
+				  <option value="text">text</option>
+				  <option value="select">select</option>
+				  <option value="checkbox">checkbox</option>
+				
+				</select>
+			</div>
+			<div class="clearfix m10"><input name="" type="button" class="fr btn_fb" onclick="submit()"></div>
+		</div>
+		<div class="center">
+			<div class="input_title">
+			属性名称：<input name="info[name]" type="text">
+			</div>
+			<div class="input_title">
+			属性排序：<input name="info[view_order]" type="text" value="0">
+			</div>
+			<div class="input_con mt10">
+				<div>属性值：<textarea name="info[value]" cols="" rows=""></textarea></div>
+				<div class="input_con_b"></div>
+			</div>
+		</div>
+	</div>
+	</form>	
+</div>
+<!--/main-->
+
+{include file="lib/footer.html"}

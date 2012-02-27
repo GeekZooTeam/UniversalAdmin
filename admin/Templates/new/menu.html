@@ -1,0 +1,35 @@
+{extends file='layout/main.html'}
+{block name="main"}
+
+<div class="main_title">
+	<h2>菜单管理</h2>
+	<p>菜单管理</p>
+</div>
+
+<div class="btn_blk">
+	<div class="fr">
+		<a href="?url=menu/create" class="btn1 fr">新增</a>
+	</div>
+</div>
+<table width="100%" class="table_list">
+	<tr>
+		<th width="70%">名称</td>
+		<th>操作</td>
+	</tr>
+	{if $data && $data->valid()}
+	{foreach $data as $val}
+	<tr{if $val@iteration % 2} class="odd"{/if}>
+		<td style="text-align:left;{if $val.is_hide}color:red;{/if}">{if $val.parent_id}|____{/if}{$val.name}</td>
+		<td class="tc"><a href="?url=menu/update&id={$val.id}"><img src="{gen_theme_url('images/i.gif')}" class="ico_edit"></a>&nbsp;&nbsp;<a href="?url=menu/delete&id={$val.id}" class="delete"><img src="{gen_theme_url('images/i.gif')}" class="ico_del" title="删除"></a></td>
+	</tr>
+	{/foreach}
+	{/if}
+
+</table>
+<div class="btn_blk">
+	<div class="fr">
+		<a href="?url=menu/create" class="btn1 fr">新增</a>
+	</div>
+
+</div>
+{/block}

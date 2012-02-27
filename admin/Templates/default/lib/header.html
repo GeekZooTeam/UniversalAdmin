@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<title>Geek Zoo</title>
+<link href="{gen_theme_url('style/style.css')}" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="{gen_theme_url('js/jquery-1.4.2.min.js')}"></script>
+<script type="text/javascript" src="{gen_theme_url('js/global.js')}"></script>
+<script type="text/javascript" src="{gen_theme_url('js/ui.js')}"></script>
+<!--[if IE]>
+<script src="js/html5.js"></script>
+<![endif]-->
+<script type="text/javascript" charset="utf-8">
+__THEME__ = '{Config::get('theme')}';
+</script>
+</head>
+
+<body>
+<!--header-->
+<div id="header">
+<div class="fr"><input name="" type="button" class="set"><input name="" type="button" class="exit" onclick=window.location.href="?url=user/logout"></div>
+<div class="fr"><strong class="name">{$smarty.session.admin_user.name}</strong><span><em>管理员</em></span></div>
+<img src="{gen_theme_url('images/logo05.png')}">
+</div>
+<!--/header-->
+
+<!--nav-->
+<ul id="nav">
+	{foreach $menu as $key=>$val}
+		<li {if in_array($menu_action, $val)}{$t_k=$key}class="current"{/if}><a href="?url={current($val)}">{$key}</a></li>
+	{/foreach}
+</ul>
+<ul class="sub_menu">
+{foreach $menu[$t_k] as $k => $v}
+		<li><a href="?url={$v}">{$k}</a></li>
+		{if not $v@last}
+		<li>|</li>
+		{/if}
+{/foreach}
+</ul>
+<!--/nav-->

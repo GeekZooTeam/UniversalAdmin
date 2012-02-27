@@ -1,0 +1,64 @@
+{extends file='layout/main.html'}
+{block name="main"}
+<div class="main_title">
+	<h2>添加属性</h2>
+	<p>管理属性(属性值一行一个)</p>
+</div>
+<form action="?url=model/create" method="post" accept-charset="utf-8">
+	<input type="hidden" name="action" value="attribute">
+	<input type="hidden" name="info[model_id]" value="{$mid}">
+
+<div class="con_blk">
+  <h3 class="light_gray">属性名称</h3>
+  <input name="info[name]" type="text" class="text" />
+</div>
+
+<div class="con_blk">
+  <h3 class="light_gray">属性排序</h3>
+  <input name="info[view_order]" type="text" class="text" value="0">
+</div>
+
+<div class="clearfix">
+	<dl class="set_blk">
+		<dt class="light_gray">属性类别</dt>
+		<dd>
+      <select name="info[type]">
+			  <option value="input" selected>input</option>
+			  <option value="file">file</option>
+			  <option value="text">text</option>
+			  <option value="select">select</option>
+			  <option value="checkbox">checkbox</option>
+			  <option value="password">password</option>
+			  <option value="date">date</option>
+			  <option value="model">model</option>
+			</select>
+		</dd>
+		<dt class="light_gray">是否唯一</dt>
+		<dd><input type="checkbox" name="info[is_unique]" value="1" rel="switch" /></dd>
+	</dl>
+</div>
+<div class="clearfix">
+	<dl class="set_blk">
+		<dt class="light_gray">列表隐藏</dt>
+		<dd><input type="checkbox" name="info[is_hide]" value="1" rel="switch" /></dd>
+		<dt class="light_gray">搜索隐藏</dt>
+		<dd><input type="checkbox" name="info[is_search_hide]" value="1" rel="switch" /></dd>
+	</dl>
+</div>
+
+<div class="con_blk">
+	<h3 class="light_gray">属性值</h3>
+	<textarea name="info[value]" cols="" rows="6"></textarea>
+</div>
+
+
+</form>
+
+<div class="btn_blk b_t">
+	<div class="fr">
+		<a href="#" class="btn2 fr ml20 cancel">取消</a>
+		<a href="#" class="btn1 fr save">确定</a>
+	</div>
+</div>
+
+{/block}

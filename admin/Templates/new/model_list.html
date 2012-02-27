@@ -1,0 +1,28 @@
+{extends file='layout/main.html'}
+{block name="main"}
+
+<div class="main_title">
+	<h2>模型列表</h2>
+	<p>模型列表及管理模型</p>
+</div>
+
+
+
+<ul class="model_list clearfix">
+	<li>
+		<img src="{gen_theme_url('images/model_icon.png')}" alt="" class="fl" />
+		<h1 class="tac"><a href="?url=model/create&action=model">新建模型</a></h1>
+		<h3 class="gray tac">请您新建模型</h3>
+		<p class="light_gray">操作不可用</p>
+	</li>
+	{foreach $data as $val}
+	<li>
+		<img src="{gen_theme_url('images/model_icon.png')}" alt="" class="fl" />
+		<h1>{$val.alias_name}</h1>
+		<h3 class="gray">{substr_fix($val.detail, 30)}</h3>
+		<p><a href="?url=model&action=attribute&mid={$val.id}">管理字段</a><a href="?url=resource&mid={$val.id}">查看内容</a> <a href="?url=model/update&action=model&id={$val.id}">修改模型</a> <a href="?url=model/delete&action=model&id={$val.id}" class="delete">删除模型</a></p>
+	</li>
+	{/foreach}
+</ul>
+
+{/block}

@@ -1,0 +1,8 @@
+<div class="top">
+	<a href="?url=user/clean_history" class="clear">清除</a>
+	<ul>
+	  {foreach $history as $val}
+		<li><a href="?url={current($val)}">{key($val)}</a></li>
+		{/foreach}
+	</ul>
+</div>

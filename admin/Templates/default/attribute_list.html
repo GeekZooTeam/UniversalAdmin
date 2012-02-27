@@ -1,0 +1,29 @@
+{include file="lib/header.html"}
+<!--main-->
+<div id="main">
+  {include file="lib/history.html"}
+	<div class="breadcrumb"><a href="?url=index">首页</a> <img src="{gen_theme_url('images/i.png')}" class="ico"> <a href="?url=model">模型</a> <img src="{gen_theme_url('images/i.png')}" class="ico"> <a href="javascript://">{$model_info.name}的字段管理</a> </div>
+	<div class="m10"><input name="" type="button" class="add" onclick=window.location.href='?url=model/create&action=attribute&mid={$model_info.id}'></div>
+	<div class="container m10">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	<thead>
+	<tr>
+		<th>字段名称：<img src="{gen_theme_url('images/i.png')}" class="down"></th>
+		<th>字段属性</th>
+		<th>字段排序</th>
+		<th>操作</th>
+	</tr>
+	</thead>
+	{foreach $data as $val}
+	<tr>
+		<td>{$val.name}</td>
+		<td>{$val.type}</td>
+		<td>{$val.view_order}</td>
+		<td><a href="?url=model/update&action=attribute&id={$val.id}"><img src="{gen_theme_url('images/i.png')}" class="edit"></a> <a href="?url=model/delete&action=attribute&id={$val.id}" class="delete"><img src="{gen_theme_url('images/i.png')}" class="del"></a></td>
+	</tr>
+	{/foreach}
+</table>
+	</div>
+</div>
+<!--/main-->
+{include file="lib/footer.html"}

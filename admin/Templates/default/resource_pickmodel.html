@@ -1,0 +1,24 @@
+{include file="lib/header.html"}
+<!--main-->
+<div id="main">
+  {include file="lib/history.html"}
+	<div class="breadcrumb"><a href="?url=index">首页</a> <img src="{gen_theme_url('images/i.png')}" class="ico"> <a href="?url=resource">内容管理</a> <img src="{gen_theme_url('images/i.png')}" class="ico"> <a href="javascript://">选择内容类型</a> </div>
+	<div class="container m10">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	<thead>
+	<tr>
+		<th>类型 <img src="{gen_theme_url('images/i.png')}" class="down"></th>
+		<th>操作</th>
+	</tr>
+	</thead>
+	{foreach $data as $val}
+	<tr>
+		<td>{$val.name}</td>
+		<td><a href="?url=resource&mid={$val.id}">查看内容</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="?url=resource/create&mid={$val.id}">添加内容</a></td>
+	</tr>
+	{/foreach}
+</table>
+	</div>
+</div>
+<!--/main-->
+{include file="lib/footer.html"}

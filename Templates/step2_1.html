@@ -1,0 +1,76 @@
+{extends file='layout/base.html'}
+{block name="container"}
+	<h1 class="tac">{$model_info.alias_name}</h1>
+	<form action="{$action}" method="post" id="submit_ass">
+		<input type="hidden" name="mid" value="{$mid}">
+		<input type="hidden" name="res_id" value="{$id}">
+		{foreach $attribute as $val}
+		<div{if !($val@iteration % 3)} class="break_bar" {/if}>
+			{if $val.type=='input'}
+						<label for="{$val.name}">{$val.name}</label>
+						<input type="text" name="attribute[{$val.id}]" placeholder="{$val.value}" value="{$order_list[$val.name]}" />
+			{elseif $val.type=='text'}
+						<label for="{$val.name}">{$val.name}</label>
+						<textarea name="attribute[{$val.id}]" cols="50" rows="6">{$order_list[$val.name]}</textarea>
+			{elseif $val.type=='checkbox'}
+						<label>{$val.name}</label>
+						{foreach $val.value as $v}
+					    <input type="checkbox" name="attribute[{$val.id}][]" value="{$v}" {if $order_list[$val.name]}{if in_array($v, explode(',', $order_list[$val.name]))} checked {/if}{/if} /> {$v}
+					  {/foreach}
+			{elseif $val.type=='select'}
+						<label>{$val.name}</label>
+			      <select name="attribute[{$val.id}]" />
+						  {foreach $val.value as $v}
+						    <option value="{$v}" {if $v==$order_list[$val.name]} selected {/if}>{$v}</option>
+						  {/foreach}
+						</select>
+			{elseif $val.type=='date'}
+					<label>{$val.name}</label>
+					{if $order_list[$val.name]}
+						{$temp=explode('-', $order_list[$val.name])}
+					{/if}
+					<select name="attribute[{$val.id}][y]">
+						<option>年</option>
+						{for $i=date('Y')+1;$i>1930;$i--}
+						<option value="{$i}" {if $i==$temp.0}selected{/if}>{$i}</option>
+						{/for}
+
+					</select>
+					<select name="attribute[{$val.id}][m]">
+						<option>月</option>
+						{for $i=1; $i <= 12; $i++}
+							<option value="{$i}" {if $i==$temp.1}selected{/if}>{$i}</option>
+						{/for}
+					</select>
+					<select name="attribute[{$val.id}][d]">
+						<option>日</option>
+						{for $i=1; $i <= 31; $i++}
+							<option value="{$i}" {if $i==$temp.2}selected{/if}>{$i}</option>
+						{/for}
+					</select>
+			{elseif $val.type=='model'}
+						<label>{$val.name}</label>
+			      <select name="attribute[{$val.id}]">
+						  {foreach $val.value as $v}
+						    <option value="{$v@key}" {if $v@key==$order_list[$val.name]}selected{/if}>{$v}</option>
+						  {/foreach}
+						</select>
+			{/if}
+			{if $val.is_unique}
+				（*唯一）
+			{/if}
+			</div>
+		{/foreach}
+
+
+
+		<a href="javascript://" class="btn_order fr next_step">下一步</a>
+		<!-- <span class="lh44"><input type="checkbox" /> 我同意《婚纱摄影预定单顾客协议》</span> -->
+	</form>
+	<script type="text/javascript" charset="utf-8">
+		$('.next_step').click(function(){
+			$('#submit_ass').submit()
+		});
+		
+	</script>
+{/block}

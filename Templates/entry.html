@@ -1,0 +1,43 @@
+{extends file='layout/base.html'}
+{block name="container"}
+<h1 class="tac">米兰时尚婚纱影楼登录页面</h1>
+	<div class="break_bar_nm">
+		<h2 class="slarge">客户信息</h2>
+	</div>
+	<dl class="large print_list clearfix">
+		{foreach $guest as $key=>$val}
+			<dt class="w100">{$key}:</dt><dd class="w300">{$val}</dd>
+		{/foreach}
+	</dl>
+	<div class="break_bar_nm">
+		<h2 class="slarge">订单信息</h2>
+	</div>
+	<dl class="large print_list clearfix">
+		{foreach $order_list as $key=>$val}
+			<dt class="w100">{$key}:</dt><dd class="w300">{$val}</dd>
+		{/foreach}
+	</dl>
+	<div class="break_bar_nm">
+		<h2 class="slarge">{$attribute.name}</h2>
+	</div>
+	<dl class="large print_list clearfix">
+		
+		{foreach $attribute.value as $key=>$val}
+			{if $guest_status}
+				{$k = array_search($guest_status, $attribute.value)}
+				{if $key<=$k}
+					<dt class="w100">{$val}</dt><dd class="w300"><img src="images/succeed.png" width="40" height="40" align="center" alt="" /></dd>
+				{else}
+					<dt class="w100">{$val}</dt><dd class="w300"><input type="button" value="{$val}" onclick="location.href='entry/update_status?id={$order_list_id}&v={$key}';" /></dd>
+				{/if}
+			{else}
+				<dt class="w100">{$val}</dt><dd class="w300"><input type="button" value="{$val}" onclick="location.href='entry/update_status?id={$order_list_id}&v={$key}';" /></dd>
+			{/if}
+		{/foreach}
+		
+	</dl>
+	<div class="break_bar_top">
+		<a href="list?type=1" class="btn_order fr mt20">返回列表</a>
+	</div>
+{/block}
+

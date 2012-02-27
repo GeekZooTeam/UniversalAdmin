@@ -1,0 +1,84 @@
+{include file="lib/header.html"}
+<!--main-->
+<div id="main">
+  {include file="lib/history.html"}
+	<div class="breadcrumb"><a href="?url=index">首页</a> <img src="{gen_theme_url('images/i.png')}" class="ico"> <a href="javascript://">内容列表</a>  </div>
+	<div class="m10"><input name="" type="button" class="add" onclick=window.location.href='?url=resource/create&mid={$mid}'></div>
+	<div class="container m10">
+		<form action="" method="post" accept-charset="utf-8">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	<thead>
+	<tr>
+		<th><input type="checkbox" class="checkAll" /></th>
+		{foreach $attribute as $val}
+				<th>{$val.name}</th>
+		{/foreach}
+		<th>添加时间</th>
+		<th>操作</th>
+	</tr>
+	</thead>
+	{foreach $data as $val}
+	<tr>
+		<td><input type="checkbox" name="check[]" value="{$val.id}"></td>
+		{foreach $attribute as $v}
+		<td>{substr_fix(get_attribute_value($val.id, $v.name), 30)}</td>
+		{/foreach}
+		<td>{date('Y-m-d h:i:s', $val.add_time)}</td>
+		<td><a href="?url=resource/update&id={$val.id}"><img src="{gen_theme_url('images/i.png')}" class="edit" title="编辑"></a> <a href="?url=resource/delete&id={$val.id}" class="delete"><img src="{gen_theme_url('images/i.png')}" class="del" title="删除"></a></td>
+	</tr>
+	{/foreach}
+</table>
+</form>
+	</div>
+	<div class="m10">
+				{if isset($pager) && $pager->getPages() > 1}
+					<div class="pages fr">
+						{if $pager->getPage() > 1}
+						<a href="{$pager->link($pager->prev())}"><img src="{gen_theme_url('images/i.png')}" class="prev"></a>
+						{/if}
+						{foreach $pager->getPagesArray(10) as $val}
+							{if $pager->getPage() == $val}
+								{$val}
+							{else}
+								<a href="{$pager->link($val)}">{$val}</a>
+							{/if}
+						{/foreach}
+						{if !in_array($pager->getPages(), $pager->getPagesArray(10))}
+						 <a href="javascript:">&middot;</a>
+						 <a href="javascript:">&middot;</a>
+						 <a href="javascript:">&middot;</a>
+						 <a href="{$pager->link($pager->end())}">{$pager->end()}</a>
+						{/if}
+						{if $pager->getPage() < $pager->getPages()}
+							<a href="{$pager->link($pager->next())}"><img src="{gen_theme_url('images/i.png')}" class="next"></a>
+            {/if}
+					</div>
+				{/if}
+				<select name="oper">
+				  <option value="0">选择操作</option>
+				  <option value="?url=resource/delete" >删除所有</option>
+				</select>
+		</div>
+</div>
+<script type="text/javascript" charset="utf-8">
+$('.checkAll').click(function(){
+  if (this.checked) {
+    $('input[name=check[]]').checkbox('off');
+  } else {
+    $('input[name=check[]]').checkbox('on');
+  }
+});
+$('select[name=oper]').change(function(){
+	var url = $(this).val(); 
+	if (url!=0) {
+		if ($('input:checked[name=check[]]').size() < 1) {
+			return false;
+		}
+		if (confirm('确定删除?此操作不能回退')) {
+			$('form').attr('action', url).submit();
+		};;
+	};
+});
+</script>
+<!--/main-->
+{include file="lib/footer.html"}

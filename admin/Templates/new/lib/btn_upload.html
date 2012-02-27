@@ -1,0 +1,78 @@
+<script>window.SWFUpload || document.write('<script src="../Library/3rd/swfupload/swfupload.js">\x3C/script>')</script> 
+
+<div><span id="file_info_{$att_id}" style="padding-right:10px;"></span><span><span id="spanplaceorder_{$att_id}"></span></span></div>
+
+<script type="text/javascript" charset="utf-8">
+new SWFUpload({
+	// Backend Settings
+	upload_url: "?url=upload",
+
+	// File Upload Settings
+	//file_size_limit : "100M",	// 100MB
+	file_types : "*.*",
+	file_types_description : "All Files",
+	file_upload_limit : "0",
+	file_queue_limit : "1",
+
+	file_dialog_start_handler : function (){
+	  //alert('file_dialog_start_handler');
+	},
+	file_queued_handler : function (file) {
+    //alert('file_queued_handler');
+  },
+	file_queue_error_handler : function (file, errorCode, message) {
+	  alert('file_queue_error_handler'+errorCode);
+	},
+	file_dialog_complete_handler : function (numFilesSelected, numFilesQueued) {
+    if (numFilesSelected > 0 && numFilesQueued > 0) {
+        this.setButtonDisabled(true);
+        this.startUpload();
+    }
+  },
+	upload_start_handler : function (file){
+	  //alert('upload_start_handler');
+	},
+	upload_progress_handler : function uploadProgress(file, bytesLoaded, bytesTotal) {
+	  var percent = Math.ceil((bytesLoaded / bytesTotal) * 100);
+	  $('#file_info_'+this.customSettings.att_id).html(file.name+' '+percent+'%');
+	},
+	upload_error_handler : function(file, errorCode, message){
+	  alert('upload_error_handler'+errorCode);
+	},
+	upload_success_handler : function (file, serverData){
+	  var html = '';
+	  if (serverData == '-1') {
+	    alert('上传失败!');
+	  } else {
+	    html = file.name+'<input type="hidden" value="'+serverData+'" name="attribute['+this.customSettings.att_id+']"/>';
+	  }
+	  $('#file_info_'+this.customSettings.att_id).html(html);
+	},
+	upload_complete_handler : function (file) {
+	  if (this.getStats().files_queued > 0) {
+	    this.startUpload();
+	  } else {
+      this.setButtonDisabled(false);
+	  }
+	},
+
+	// Button Settings
+	button_image_url : "../Library/3rd/swfupload/XPButtonUploadText_61x22.png",
+	button_placeholder_id : "spanplaceorder_{$att_id}",
+	button_width: 61,
+	button_height: 22,
+
+	// Flash Settings
+	flash_url : "../Library/3rd/swfupload/swfupload.swf",
+	
+
+	custom_settings : {
+		att_id : "{$att_id}"
+	},
+	
+	// Debug Settings
+	debug: false
+});
+</script>
+</body>
+</html>

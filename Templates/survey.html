@@ -1,0 +1,85 @@
+{extends file='layout/base.html'}
+{block name="container"}
+<h1 class="tac">米兰时尚婚纱影楼新调查表回访记录</h1>
+	<div class="break_bar_nm">
+		<h2 class="slarge">新人调查表详情</h2>
+	</div>
+	<dl class="large print_list clearfix">
+		{foreach $guest as $key=>$val}
+		<dt class="w100">{$key}:</dt><dd class="w300">{$val}</dd>
+		{/foreach}
+	</dl>
+	<div class="break_bar_nm">
+		<h2 class="slarge">门市回访情况</h2>
+	</div>
+	<ul class="large mlr20 comments">
+
+		{if !$feedback_records}
+		<li class="tac"><h1 class="light_gray pb20">还未对客人进行回访</h1></li>
+		{/if}
+		{foreach $feedback_records as $val}
+		<li>
+			<h1 class="light_gray fr ml20"><a class="real_time" href="#">{$val.add_time}</a></h1>{get_attribute_value($val.id, '内容')}
+			
+		</li>
+		{/foreach}
+		<li class="clearfix">
+			<form action="{$action}" method="post">
+				<input type="hidden" name="info[34]" value="{$smarty.get.id}">
+				<input type="hidden" name="feedback" value="{$guest_all['调查表']}">
+			<textarea name="info[33]"  style="width:100%;" rows="6" placeholder="这里来填写您的回访记录"></textarea>
+			<input type="submit" value="提交回访记录" class="fr xxlarge mt10" />
+			</form>
+		</li>
+	</ul>
+	<div class="break_bar_top clearfix xxlarge">
+		<input type="button" value="变订单" class="fr ml20 mt20" onclick="window.location.href='step2_1.html?id={$order_list_id}'" /> <input type="button" value="变死单" class="fr ml20 mt20" onclick="window.location.href='list/delete.html?id={$smarty.get.id}'" /> <input type="button" value="有可能" class="fr mt20" />
+	</div>
+	<script type="text/javascript" charset="utf-8">
+	
+	
+	function real_time(time) {
+	    var m = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+	        w = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+	        d = new Date();
+
+	    time = parseInt(time);
+
+	    var delta = parseInt(d.getTime() / 1000) - time;
+
+	    if (delta < 3600 * 24) {
+	        if (delta < 60) {
+	            delta += '秒';
+	        } else if (delta < 3600) {
+	            delta = parseInt(delta / 60);
+	            delta += '分钟';
+	        } else {
+	            delta = parseInt(delta / 3600);
+	            delta += '小时';
+	        }
+	        delta += '前';
+	    } else {
+	        d.setTime(time * 1000);
+	        var t = [parseInt(d.getHours()), parseInt(d.getMinutes())];
+	        var alpha = t[0] > 12 ? (t[0] - 12) + ':' + t[1] + ' pm' : t[0] + ':' + t[1] + ' am';
+	        if (delta < 3600 * 48) {
+	            delta = '昨日' + alpha;
+	        } else if (delta < 3600 * 24 * 7) {
+	            delta = w[d.getDay()] + alpha;
+	        } else {
+	            delta = m[d.getMonth()] + d.getDate() + '日, ' + d.getFullYear() + ' ' + alpha;
+	        }
+	    }
+
+	    return delta;
+	}
+	
+	  $('.real_time').each(function(){
+	    var html = $(this).html();
+	    $(this).replaceWith(real_time(html));
+	  });
+
+	</script>
+
+{/block}
+

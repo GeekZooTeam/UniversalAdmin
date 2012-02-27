@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Geek Zoo</title>
+<link href="{gen_theme_url('style/style.css')}" rel="stylesheet" type="text/css">
+<link href="{gen_theme_url('style/style_login.css')}" rel="stylesheet" type="text/css">
+{$ifjump}
+</head>
+<body>
+	<!--header-->
+	<div id="header"><img src="{gen_theme_url('images/logo06.png')}"></div>
+	<!--/header-->
+	<div id="login">
+		<div class="login_t"></div>
+		<div class="login_c" id="message_cp">
+		  {if empty($jumpurl)}
+		  <h1><span class="error"></span>操作失败</h1>
+		  {else}
+		  <h1><span class="succ"></span>操作成功</h1>
+		  {/if}
+		  <h2>
+		  	{$msg}
+		  </h2>
+		  <div class="click_btn">
+		  	{if empty($jumpurl)} <a href="javascript:history.back();">返回重试</a> {else} <a href="{$jumpurl}">确认继续</a> {/if}
+		  </div>
+		</div>
+		<div class="login_b"></div>
+	</div>
+</body>
+</html>

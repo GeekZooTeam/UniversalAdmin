@@ -1,0 +1,34 @@
+{extends file='layout/base.html'}
+{block name="nav"}
+<style>
+</style>
+{/block}
+{block name="container"}
+<h1 class="tac">订单详情</h1>
+	<div class="break_bar_nm">
+		<h2 class="slarge">客户信息</h2>
+	</div>
+	<dl class="large print_list clearfix">
+		{foreach $attribute_m3 as $val}
+			<dt class="w100">{$val.name}:</dt><dd class="w300">{$val.attribute_value}</dd>
+		{/foreach}
+	</dl>
+	<div class="break_bar_nm">
+		<h2 class="slarge">订单信息</h2>
+	</div>
+	<dl class="large print_list clearfix">
+		{foreach $attribute_m4 as $val}
+			<dt class="w100">{$val.name}:</dt><dd class="w300">{$val.attribute_value}</dd>
+		{/foreach}
+	</dl>
+
+	<div class="break_bar_nm">
+		<h2 class="slarge">客户签字</h2>
+	</div>
+	<dl class="large print_list clearfix">
+		<dt class="w100">服务门市:</dt><dd class="w300">{$user_info['员工姓名']}</dd>
+		<dd class="w400">客户确认并签名:</dd>
+		<dt class="w100">门市手机:</dt><dd class="w300">{$user_info['员工手机']}</dd>
+	</dl>
+{/block}
+

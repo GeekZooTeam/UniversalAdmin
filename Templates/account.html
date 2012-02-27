@@ -1,0 +1,164 @@
+{extends file='layout/base.html'}
+{block name="selected"}{/block}
+{block name="container"}
+<script type="text/javascript" charset="utf-8">
+$('.nav li:eq(4)').addClass('current');
+</script>
+
+<script type="text/javascript" src="js/chart/highcharts.js"></script>
+<script type="text/javascript">
+	Highcharts.visualize = function(table, options) {
+		// the categories
+		options.xAxis.categories = [];
+		$('tbody th', table).each( function(i) {
+			options.xAxis.categories.push(this.innerHTML);
+		});
+		
+		// the data series
+		options.series = [];
+		$('tr', table).each( function(i) {
+			var tr = this;
+			$('th, td', tr).each( function(j) {
+				if (j > 0) {  // skip first column
+					if (i == 0) {  // get the name and init the series
+						options.series[j - 1] = { 
+							name: this.innerHTML,
+							data: []
+						};
+					} else {   // add values
+						options.series[j - 1].data.push(parseFloat(this.innerHTML));
+					}
+				}
+			});
+		});
+		
+		var chart = new Highcharts.Chart(options);
+	}
+		
+	// On document ready, call visualize on the datatable.
+	$(document).ready(function() {			
+		var table = document.getElementById('datatable'),
+		options = {
+			   chart: {
+			      renderTo: 'container',
+			      defaultSeriesType: 'column'
+			   },
+			   title: {
+			      text: '销售业绩'
+			   },
+			   xAxis: {
+			   },
+			   yAxis: {
+			      title: {
+			         text: '金额'
+			      }
+			   },
+			   tooltip: {
+			      formatter: function() {
+			         return '<b>'+ this.series.name +'</b><br/>'+
+			            this.y +' '+ this.x.toLowerCase();
+			      }
+			   }
+			};
+		
+	      					
+		Highcharts.visualize(table, options);
+	});
+		
+</script>
+<h1 class="tac">米兰时尚婚纱影楼账户管理</h1>
+	<div class="break_bar_nm">
+		<h2 class="slarge">销售业绩</h2>
+	</div>
+	<dl class="large print_list clearfix">
+		<div id="container" style="width: 500px; height: 400px; margin: 0 auto"></div>
+		<table id="datatable" style="display:none;">
+			<thead>
+				<tr>
+					<th></th>
+					<th>本周</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>周一</th>
+					<td>{$date[1]}</td>
+				</tr>
+				<tr>
+					<th>周二</th>
+					<td>{$date[2]}</td>
+				</tr>
+				<tr>
+					<th>周三</th>
+					<td>{$date[3]}</td>
+				</tr>
+				<tr>
+					<th>周四</th>
+					<td>{$date[4]}</td>
+				</tr>
+				<tr>
+					<th>周五</th>
+					<td>{$date[5]}</td>
+				</tr>
+				<tr>
+					<th>周六</th>
+					<td>{$date[6]}</td>
+				</tr>
+				<tr>
+					<th>周日</th>
+					<td>{$date[7]}</td>
+				</tr>
+			</tbody>
+		</table>
+	</dl>
+	<div class="break_bar_nm">
+		<h2 class="slarge">账户设置</h2>
+	</div>
+	<form action="account" method="post" id="update_pw_submit">
+	<dl class="large print_list clearfix">
+		<dt class="w100">原始密码:</dt><dd class="w300"><input type="password" placeholder="输入您目前使用的密码" name="old_pw" /></dd>
+		<dt class="w100"></dt><dd class="w300"></dd>
+		<dt class="w100">新密码:</dt><dd class="w300"><input type="password" placeholder="输入您要修改的新密码" name="new_pw" /></dd>
+		<dt class="w100"></dt><dd class="w300"></dd>
+		<dt class="w100">确认密码:</dt><dd class="w300"><input type="password" placeholder="确认您要修改的新密码" name="re_new_pw" /></dd>
+	</dl>
+	</form>
+	
+	<div class="break_bar_top clearfix xxlarge">
+		<a href="logout" class="btn_order fr mt20 update_pw">退出系统</a>
+		<a href="javascript://" class="btn_order fr mt20 mr30 update_pw update_pw2">修改密码</a>
+	</div>
+	<script type="text/javascript" charset="utf-8">
+	$(".update_pw2").click(function(){
+		if ($("input[name='old_pw']").val()=='') {
+			alert('请输入您目前使用的密码');
+			$("input[name='old_pw']").focus();
+			return '';
+		};
+		
+		if ($("input[name='new_pw']").val()=='') {
+			alert('请输入您要修改的新密码');
+			$("input[name='new_pw']").focus();
+			return '';
+		};
+		
+		if ($("input[name='re_new_pw']").val()=='') {
+			alert('请确认您要修改的新密码');
+			$("input[name='re_new_pw']").focus();
+			return '';
+		};
+		
+		if ($("input[name='re_new_pw']").val()!=$("input[name='new_pw']").val()) {
+			alert('两次输入的密码不一致');
+			$("input[name='re_new_pw']").focus();
+			return '';
+		};
+		
+		$("#update_pw_submit").submit();
+		
+	});
+
+		
+	</script>
+	{/block}
+

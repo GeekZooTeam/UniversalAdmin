@@ -1,0 +1,26 @@
+{if isset($pager) && $pager->getPages() > 1}
+
+<div class="page fl">
+
+	{if $pager->getPage() > 1}
+	  <a href="{$pager->link($pager->prev())}">上一页</a>
+	{/if}
+
+  {foreach $pager->getPagesArray(10) as $val}
+    {if $pager->getPage() == $val}
+  		<a href="javascript:" class="current">{$val}</a>
+  	{else}
+  		<a href="{$pager->link($val)}">{$val}</a>
+  	{/if}
+	{/foreach}
+
+	{if !in_array($pager->getPages(), $pager->getPagesArray(10))}
+    ...<a href="{$pager->link($pager->end())}">{$pager->end()}</a>
+	{/if}
+
+  {if $pager->getPage() < $pager->getPages()}
+    <a href="{$pager->link($pager->next())}">下一页</a>
+  {/if}
+
+</div>
+{/if}
